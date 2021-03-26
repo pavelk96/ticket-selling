@@ -9,6 +9,8 @@ import Menu from "../header/menu";
 import MovieDetails from "../movie-details";
 import MovieDescription from "../movie-description";
 
+import './app.css';
+
 export default class App extends Component {
 
 
@@ -16,13 +18,19 @@ export default class App extends Component {
     return(
           <div>
               <ErrorBoundry>
-                  <Menu/>
-                  <RegistrationButton/>
-                  <Search/>
-                  <MovieTrailer/>
-                  <Poster/>
-                  <MovieDetails/>
-                  <MovieDescription/>
+                  <div className="header">
+                      <Search/>
+                      <RegistrationButton/>
+               </div>
+                  <div>
+                      <Menu/>
+                  </div>
+                  <div className="movies">
+                      <Poster/>
+                      <MovieDescription/>
+                      <MovieTrailer/>
+                      <MovieDetails/>
+                  </div>
               </ErrorBoundry>
           </div>
     )
