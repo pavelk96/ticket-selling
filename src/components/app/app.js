@@ -1,6 +1,11 @@
 import React,{Component} from "react";
+
 import Poster from "../poster";
 import ErrorBoundry from "../error/error-boundry/error-boundry";
+import RegistrationButton from "../header/registration-button";
+import Search from "../header/search";
+import MovieTrailer from "../movie-trailer";
+import Menu from "../header/menu";
 
 export default class App extends Component {
 
@@ -9,6 +14,10 @@ export default class App extends Component {
     return(
           <div>
               <ErrorBoundry>
+                  <Menu/>
+                  <RegistrationButton/>
+                  <Search/>
+                  <MovieTrailer/>
                   <Poster/>
               </ErrorBoundry>
           </div>

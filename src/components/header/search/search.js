@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 
 
-export default class RegistrationButton extends Component {
+export default class Search extends Component {
     render () {
         return (
             <div>
-                <button>RegistrationButton</button>
+                <button>Search</button>
             </div>
         )
     }
