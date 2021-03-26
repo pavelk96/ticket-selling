@@ -6,6 +6,8 @@ import RegistrationButton from "../header/registration-button";
 import Search from "../header/search";
 import MovieTrailer from "../movie-trailer";
 import Menu from "../header/menu";
+import MovieDetails from "../movie-details";
+import MovieDescription from "../movie-description";
 
 export default class App extends Component {
 
@@ -19,9 +21,10 @@ export default class App extends Component {
                   <Search/>
                   <MovieTrailer/>
                   <Poster/>
+                  <MovieDetails/>
+                  <MovieDescription/>
               </ErrorBoundry>
           </div>
-
     )
   }
 }
