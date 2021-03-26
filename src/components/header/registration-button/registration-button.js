@@ -5,7 +5,7 @@ export default class RegistrationButton extends Component {
     render () {
         return (
             <div>
-                <button>RegistrationButton</button>
+                <button className="btn">RegistrationButton</button>
             </div>
         )
     }

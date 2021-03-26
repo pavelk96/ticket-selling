@@ -6,7 +6,7 @@ export default class Search extends Component {
         return (
             <div>
                 <input type="text" size="20"/>
-                <button>Search</button>
+                <button className="btn">Search</button>
             </div>
         )
     }
