@@ -1,14 +1,9 @@
-const logoutProfile = () => {
+const getDataFilms = (payload) => {
     return {
         type: 'LOGOUT_USER',
+        payload: payload
     }
 }
 
-const loginProfile = () => {
-    return {
-        type: 'LOGIN_USER',
-    }
-}
 
-export {logoutProfile,
-        loginProfile};
+export {getDataFilms};

@@ -1,9 +1,11 @@
 import React,{Component} from 'react';
 import KinopoiskService from "../../../services/kinopoisk-service";
+import  "./movie-details.css";
+import {connect} from "react-redux";
 
 
 
-export default class MovieDetails extends Component{
+class MovieDetails extends Component{
 
     KinopoiskService = new KinopoiskService();
 
@@ -45,8 +47,8 @@ export default class MovieDetails extends Component{
         console.log(res);
     }
     componentDidMount() {
-        this.getFilm("634786");
-        this.searchFilmByKeyWord("Мстители");
+        this.getFilm("1311396");
+        this.searchFilmByKeyWord("2021");
     }
 
 
@@ -55,12 +57,41 @@ export default class MovieDetails extends Component{
         return(
 
 
-            <div>
-                <h1>{this.state.label}</h1>
-                <img src={this.state.posterUrlPreview}/>
-                <span>{this.state.description}</span>
-                <span> Жанры: {this.state.countries.map((country, index) => <span key={index + country}>{country} </span>)}</span>
+            <div className="movie-details">
+                <img src={this.state.posterUrlPreview} width="200" height="280" className="poster-preview"/>
+                <span>
+                    <h1>{this.state.label}</h1>
+                    <li>{this.state.description}</li>
+                    <li><b>Страна: </b>{this.state.countries.map((country, index) => <span key={index + country}>{country} </span>)}</li>
+                </span>
+                <button className="child-active btn">Трейлер</button>
+                <button className="child-active btn">Подробнее</button>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        countries: state.countries,
+        label: state.label,
+        description: state.description,
+        distributors: state.distributors,
+        filmId: state.filmId,
+        filmLength: state.filmLength,
+        facts: state.facts,
+        genres: state.genres,
+        posterUrl: state.posterUrl,
+        posterUrlPreview: state.posterUrlPreview,
+        premiereWorld: state.premiereWorld,
+        year: state.year
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MovieDetails);

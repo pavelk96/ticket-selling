@@ -27,9 +27,6 @@ export default class App extends Component {
                       <Menu/>
                   </div>
                   <div className="movies">
-                      <Poster/>
-                      <MovieSpecification/>
-                      <MovieTrailer/>
                       <MovieDetails/>
                   </div>
               </ErrorBoundry>
