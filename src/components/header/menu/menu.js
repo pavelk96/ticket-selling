@@ -22,6 +22,7 @@ export default class Menu extends Component {
     render () {
 
         this.getData();
+        this.getData();
 
         return (
             <div>
