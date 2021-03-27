@@ -1,17 +1,18 @@
 import React,{Component} from "react";
 
-import Poster from "../poster";
+import Poster from "../movie-item-block/poster";
 import ErrorBoundry from "../error/error-boundry/error-boundry";
 import RegistrationButton from "../header/registration-button";
 import Search from "../header/search";
-import MovieTrailer from "../movie-trailer";
+import MovieTrailer from "../movie-item-block/movie-trailer";
 import Menu from "../header/menu";
-import MovieDetails from "../movie-details";
-import MovieDescription from "../movie-description";
+import MovieDetails from "../movie-item-block/movie-details";
+import MovieSpecification from "../movie-item-block/movie-specification";
 
 import './app.css';
 
 export default class App extends Component {
+
 
 
   render() {
@@ -27,7 +28,7 @@ export default class App extends Component {
                   </div>
                   <div className="movies">
                       <Poster/>
-                      <MovieDescription/>
+                      <MovieSpecification/>
                       <MovieTrailer/>
                       <MovieDetails/>
                   </div>
