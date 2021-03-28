@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import KinopoiskService from "../../../services/kinopoisk-service";
 import  "./movie-details.css";
 import {connect} from "react-redux";
-
+import {getFilmById} from "../../../actions";
 
 
 class MovieDetails extends Component{
@@ -47,8 +47,8 @@ class MovieDetails extends Component{
         console.log(res);
     }
     componentDidMount() {
-        this.getFilm("1311396");
-        this.searchFilmByKeyWord("2021");
+        this.getFilm("2656");
+        this.searchFilmByKeyWord("Пя");
     }
 
 
@@ -90,7 +90,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        getFilmById: () => dispatch(getFilmById())
     }
 }
 

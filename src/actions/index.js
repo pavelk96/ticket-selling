@@ -1,9 +1,9 @@
-const getDataFilms = (payload) => {
+const getFilmById = (payload) => {
     return {
-        type: 'LOGOUT_USER',
+        type: 'GET_FILM_BY_ID',
         payload: payload
     }
 }
 
 
-export {getDataFilms};
+export {getFilmById};

@@ -20,7 +20,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case `LOGOUT_USER`:
+        case `GET_FILM_BY_ID`:
             return {...state, isLoading: false}
 
         default:
