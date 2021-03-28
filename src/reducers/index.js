@@ -52,6 +52,22 @@ const reducer = (state = initialState, action) => {
                 error: action.payload,
                 isLoading: false}
 
+        case `GET_FILMS_SEARCH_REQUEST`:
+            return {...state,
+                filmsSearch:[],
+                isLoading: true}
+
+        case `GET_FILMS_SEARCH_SUCCESS`:
+            console.log(action)
+            return {...state,
+                filmsSearch: action.payload,
+                isLoading: false}
+
+        case `GET_FILMS_SEARCH_ERROR`:
+            return {...state,
+                error: action.payload,
+                isLoading: false}
+
         default:
             return state;
     }

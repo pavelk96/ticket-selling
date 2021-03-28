@@ -26,7 +26,7 @@ export default class KinopoiskService {
         return this._transformFilm(film);
     };
 
-    getFilmsByLabel = async (keyWord) => {
+    getFilmsByKeyWord = async (keyWord) => {
         const request = (`${this._apiKeyWord}${keyWord}&page=1`);
         return await this.getFilm(request)
     };

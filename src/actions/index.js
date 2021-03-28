@@ -28,10 +28,40 @@ const fetchFilmData = (dispatch) => (id) => {
         .catch((err) => dispatch(getFilmError(err)));
 };
 
+const getFilmsSearchRequest = () => {
+    return {
+        type: 'GET_FILMS_SEARCH_REQUEST'
+    };
+};
+
+const getFilmsSearchSuccess = (filmsSearch) => {
+    return {
+        type: 'GET_FILMS_SEARCH_SUCCESS',
+        payload: filmsSearch
+    };
+};
+
+const getFilmsSearchError = () => {
+    return {
+        type: 'GET_FILMS_SEARCH_ERROR'
+    };
+};
+
+const fetchFilmsSearchData = (dispatch) => (keyword) => {
+    dispatch(getFilmsSearchRequest());
+    kinopoiskService.getFilmsByKeyWord(keyword)
+        .then((film) => dispatch(getFilmsSearchSuccess(film)))
+        .catch((err) => dispatch(getFilmsSearchError(err)));
+};
+
 
 export {
     getFilmRequest,
     getFilmSuccess,
     getFilmError,
-    fetchFilmData
+    fetchFilmData,
+    getFilmsSearchRequest,
+    getFilmsSearchSuccess,
+    getFilmsSearchError,
+    fetchFilmsSearchData
 };

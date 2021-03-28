@@ -2,21 +2,21 @@ import React,{Component} from 'react';
 import KinopoiskService from "../../../services/kinopoisk-service";
 import  "./movie-details.css";
 import {connect} from "react-redux";
-import {fetchFilmData} from "../../../actions";
+import {fetchFilmData,fetchFilmsSearchData} from "../../../actions";
 
 
 class MovieDetails extends Component{
 
+    KinopoiskService = new KinopoiskService();
 
     searchFilmByKeyWord = async (keyWord) => {
-        const res = await this.KinopoiskService.getFilmsByLabel(keyWord);
+        const res = await this.KinopoiskService.getFilmsByKeyWord(keyWord);
         console.log(res);
     };
 
     componentDidMount() {
-       // this.getFilm("26561");
-       // this.searchFilmByKeyWord("Пя");
-        this.props.fetchFilmData("2656")
+        this.props.fetchFilmData("48028")
+        this.props.fetchFilmsSearchData("Ну")
     };
 
 
@@ -26,7 +26,7 @@ class MovieDetails extends Component{
 
 
             <div className="movie-details">
-                <img src={this.props.filmData?.posterUrlPreview} width="200" height="280" className="poster-preview"/>
+                <img src={this.props.filmData?.posterUrlPreview} alt="img" width="200" height="280" className="poster-preview"/>
                 <span>
                     <h1>{this.props.filmData?.label}</h1>
                     <li>{this.props.filmData?.description}</li>
@@ -48,6 +48,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFilmData: fetchFilmData(dispatch),
+        fetchFilmsSearchData: fetchFilmsSearchData(dispatch)
     }
 }
 
