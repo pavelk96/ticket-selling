@@ -77,7 +77,7 @@ const reducer = (state = initialState, action) => {
         case `GET_FILMS_DIGITAL_RELEASES_SUCCESS`:
             console.log(action)
             return {...state,
-                filmsDigitalReleases: action.payload,
+                filmsDigitalReleases: action.payload?.films,
                 isLoading: false}
 
         case `GET_FILMS_DIGITAL_RELEASES_ERROR`:
