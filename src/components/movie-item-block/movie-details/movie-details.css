@@ -1,0 +1,16 @@
+.movie-details{
+    width: 900px;
+    display: flex;
+    height: 100%;
+    margin-top: 1%;
+    margin-left: 500px;
+    background-color: #f1f1f5;
+    border-radius: 25px;
+}
+.child-active {
+    align-self: flex-end;
+}
+
+.poster-preview{
+    margin-right: 10px;
+}

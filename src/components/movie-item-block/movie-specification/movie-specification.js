@@ -2,11 +2,11 @@ import React,{Component} from 'react';
 
 
 
-export default class MovieDetails extends Component{
+export default class MovieSpecification extends Component{
     render(){
         return(
             <div>
-                Movie Trailer
+                Movie Description
             </div>
         )
     }
