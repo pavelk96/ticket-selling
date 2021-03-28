@@ -54,6 +54,32 @@ const fetchFilmsSearchData = (dispatch) => (keyword) => {
         .catch((err) => dispatch(getFilmsSearchError(err)));
 };
 
+const getFilmsDigitalReleasesRequest = () => {
+    return {
+        type: 'GET_FILMS_DIGITAL_RELEASES_REQUEST'
+    };
+};
+
+const getFilmsDigitalReleasesSuccess = (filmsDigitalReleases) => {
+    return {
+        type: 'GET_FILMS_DIGITAL_RELEASES_SUCCESS',
+        payload: filmsDigitalReleases
+    };
+};
+
+const getFilmsDigitalReleasesError = () => {
+    return {
+        type: 'GET_FILMS_DIGITAL_RELEASES_ERROR'
+    };
+};
+
+const fetchFilmsDigitalReleasesData = (dispatch) => (year, month) => {
+    dispatch(getFilmsDigitalReleasesRequest());
+    kinopoiskService.getFilmsDigitalReleases(year, month)
+        .then((film) => dispatch(getFilmsDigitalReleasesSuccess(film)))
+        .catch((err) => dispatch(getFilmsDigitalReleasesError(err)));
+};
+
 
 export {
     getFilmRequest,
@@ -63,5 +89,9 @@ export {
     getFilmsSearchRequest,
     getFilmsSearchSuccess,
     getFilmsSearchError,
-    fetchFilmsSearchData
+    fetchFilmsSearchData,
+    getFilmsDigitalReleasesRequest,
+    getFilmsDigitalReleasesSuccess,
+    getFilmsDigitalReleasesError,
+    fetchFilmsDigitalReleasesData
 };

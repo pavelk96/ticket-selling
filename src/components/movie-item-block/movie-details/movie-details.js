@@ -1,22 +1,15 @@
 import React,{Component} from 'react';
-import KinopoiskService from "../../../services/kinopoisk-service";
 import  "./movie-details.css";
 import {connect} from "react-redux";
-import {fetchFilmData,fetchFilmsSearchData} from "../../../actions";
+import {fetchFilmData,fetchFilmsSearchData, fetchFilmsDigitalReleasesData} from "../../../actions";
 
 
 class MovieDetails extends Component{
 
-    KinopoiskService = new KinopoiskService();
-
-    searchFilmByKeyWord = async (keyWord) => {
-        const res = await this.KinopoiskService.getFilmsByKeyWord(keyWord);
-        console.log(res);
-    };
-
     componentDidMount() {
-        this.props.fetchFilmData("48028")
-        this.props.fetchFilmsSearchData("Ну")
+        this.props.fetchFilmData("312")
+        this.props.fetchFilmsSearchData("Властелин")
+        this.props.fetchFilmsDigitalReleasesData("2020", "MAY")
     };
 
 
@@ -48,7 +41,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchFilmData: fetchFilmData(dispatch),
-        fetchFilmsSearchData: fetchFilmsSearchData(dispatch)
+        fetchFilmsSearchData: fetchFilmsSearchData(dispatch),
+        fetchFilmsDigitalReleasesData: fetchFilmsDigitalReleasesData(dispatch)
     }
 }
 

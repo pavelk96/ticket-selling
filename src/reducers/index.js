@@ -15,14 +15,15 @@ const initialState = {
     },
     filmsSearch: [],
     filmsList: [],
+    filmsDigitalReleases: [],
     isLoading: false,
     error: null
-
-
-}
+};
 
 const reducer = (state = initialState, action) => {
+
     switch (action.type) {
+
         case `GET_FILM_REQUEST`:
             return {...state,
                 filmData:{
@@ -64,6 +65,22 @@ const reducer = (state = initialState, action) => {
                 isLoading: false}
 
         case `GET_FILMS_SEARCH_ERROR`:
+            return {...state,
+                error: action.payload,
+                isLoading: false}
+
+        case `GET_FILMS_DIGITAL_RELEASES_REQUEST`:
+            return {...state,
+                filmsDigitalReleases:[],
+                isLoading: true}
+
+        case `GET_FILMS_DIGITAL_RELEASES_SUCCESS`:
+            console.log(action)
+            return {...state,
+                filmsDigitalReleases: action.payload,
+                isLoading: false}
+
+        case `GET_FILMS_DIGITAL_RELEASES_ERROR`:
             return {...state,
                 error: action.payload,
                 isLoading: false}
