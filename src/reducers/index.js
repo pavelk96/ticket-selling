@@ -1,5 +1,5 @@
 const initialState = {
-    films:{
+    filmData:{
         countries: [],
         label: "",
         description: "",
@@ -11,17 +11,46 @@ const initialState = {
         posterUrl: "",
         posterUrlPreview: "",
         premiereWorld: "",
-        year: "",
+        year: ""
     },
-    isLoading: true
+    filmsSearch: [],
+    filmsList: [],
+    isLoading: false,
+    error: null
 
 
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case `GET_FILM_BY_ID`:
-            return {...state, isLoading: false}
+        case `GET_FILM_REQUEST`:
+            return {...state,
+                filmData:{
+                    countries: [],
+                    label: "",
+                    description: "",
+                    distributors: "",
+                    filmId: "",
+                    filmLength: "",
+                    facts: [],
+                    genres: [],
+                    posterUrl: "",
+                    posterUrlPreview: "",
+                    premiereWorld: "",
+                    year: ""
+                },
+                isLoading: true}
+
+        case `GET_FILM_SUCCESS`:
+            console.log(action)
+            return {...state,
+                filmData: action.payload,
+                isLoading: false}
+
+        case `GET_FILM_ERROR`:
+            return {...state,
+                error: action.payload,
+                isLoading: false}
 
         default:
             return state;
