@@ -1,13 +1,13 @@
-import React,{Component} from 'react';
+import React from 'react';
+import {ReactComponent as SpinnerSVG} from "./spinner.svg";
+import './spinner.css'
 
+const Spinner = () => {
+    return (
+        <div className='spinner'>
+            <SpinnerSVG/>
+        </div>
+    )
+};
 
-
-export default class Spinner extends Component{
-    render(){
-        return(
-            <div>
-                Loading...
-            </div>
-        )
-    }
-}
+export default Spinner;

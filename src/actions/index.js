@@ -82,16 +82,7 @@ const fetchFilmsDigitalReleasesData = (dispatch) => (year, month) => {
 
 
 export {
-    getFilmRequest,
-    getFilmSuccess,
-    getFilmError,
     fetchFilmData,
-    getFilmsSearchRequest,
-    getFilmsSearchSuccess,
-    getFilmsSearchError,
     fetchFilmsSearchData,
-    getFilmsDigitalReleasesRequest,
-    getFilmsDigitalReleasesSuccess,
-    getFilmsDigitalReleasesError,
     fetchFilmsDigitalReleasesData
 };

@@ -3,7 +3,6 @@ export default class KinopoiskService {
     _apiBase = 'https://kinopoiskapiunofficial.tech/api/v2.1/films/';
     _apiKeyWord = "search-by-keyword?keyword=";
 
-
     getFilm = async (request) => {
         return await new Promise((resolve) => {
             fetch(`${this._apiBase}${request}`, {
@@ -35,7 +34,7 @@ export default class KinopoiskService {
     getFilmsDigitalReleases = async (year, month) => {
         const request = await (`${this._apiKeyWord}releases?year=${year}&month=${month}&page=1`);
         return await this.getFilm(request);
-    }
+    };
 
     _transformFilm = (film) => {
         return {
@@ -54,5 +53,5 @@ export default class KinopoiskService {
         };
     };
 
-}
+};
 

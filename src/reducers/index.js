@@ -61,7 +61,7 @@ const reducer = (state = initialState, action) => {
         case `GET_FILMS_SEARCH_SUCCESS`:
             console.log(action)
             return {...state,
-                filmsSearch: action.payload,
+                filmsSearch: action.payload?.films,
                 isLoading: false}
 
         case `GET_FILMS_SEARCH_ERROR`:
