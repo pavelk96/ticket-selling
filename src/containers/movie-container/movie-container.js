@@ -7,11 +7,7 @@ import Spinner from "../../services/spinner";
 class MovieContainer extends Component{
 
     componentDidMount() {
-<<<<<<< HEAD
         this.props.fetchFilmsSearchData("Властелин");
-=======
-        this.props.fetchFilmsDigitalReleasesData("2019");
->>>>>>> bc639ce5c373f6147c1646ba6f2f009cd183cb6d
     };
 
 
