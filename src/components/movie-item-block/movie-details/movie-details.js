@@ -13,6 +13,7 @@ class MovieDetails extends Component{
                 <span>
                     <h1>{this.props.film?.nameRu}</h1>
                     <li>{this.props.film?.description}</li>
+                    <li>{this.props.film?.facts}</li>
                 </span>
                 <button className="child-active btn">Трейлер</button>
                 <button className="child-active btn">Подробнее</button>

@@ -7,16 +7,19 @@ import Spinner from "../../services/spinner";
 class MovieContainer extends Component{
 
     componentDidMount() {
+<<<<<<< HEAD
         this.props.fetchFilmsSearchData("Властелин");
+=======
+        this.props.fetchFilmsDigitalReleasesData("2019");
+>>>>>>> bc639ce5c373f6147c1646ba6f2f009cd183cb6d
     };
 
 
     render(){
-        const {isLoading, filmsSearch} = this.props;
+        const {isLoading, filmsDigitalReleases} = this.props;
         return (
             <>
-                { isLoading ? <Spinner /> : (filmsSearch || []).map(film => <MovieDetails key={film.filmId} film={film}/>) }
-
+                { isLoading ? <Spinner /> : (filmsDigitalReleases || []).map(film => <MovieDetails key={film.filmId} film={film}/>) }
             </>
 
         )
@@ -25,7 +28,7 @@ class MovieContainer extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        filmsSearch: state.filmsSearch,
+        filmsDigitalReleases: state.filmsDigitalReleases,
         isLoading: state.isLoading
     };
 };
