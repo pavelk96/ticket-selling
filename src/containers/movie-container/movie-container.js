@@ -12,10 +12,10 @@ class MovieContainer extends Component{
 
 
     render(){
-        const {isLoading, filmsDigitalReleases} = this.props;
+        const {isLoading, filmsSearch} = this.props;
         return (
             <>
-                { isLoading ? <Spinner /> : (filmsDigitalReleases || []).map(film => <MovieDetails key={film.filmId} film={film}/>) }
+                { isLoading ? <Spinner /> : (filmsSearch || []).map(film => <MovieDetails key={film.filmId} film={film}/>) }
             </>
 
         )
@@ -24,7 +24,7 @@ class MovieContainer extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        filmsDigitalReleases: state.filmsDigitalReleases,
+        filmsSearch: state.filmsSearch,
         isLoading: state.isLoading
     };
 };
