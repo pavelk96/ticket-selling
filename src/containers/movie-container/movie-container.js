@@ -7,9 +7,8 @@ import Spinner from "../../services/spinner";
 class MovieContainer extends Component{
 
     componentDidMount() {
-        this.props.fetchFilmsSearchData("один");
+        this.props.fetchFilmsSearchData("Властелин");
     };
-
 
 
     render(){

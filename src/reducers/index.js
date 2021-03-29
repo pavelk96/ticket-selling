@@ -16,6 +16,7 @@ const initialState = {
     filmsSearch: [],
     filmsList: [],
     filmsDigitalReleases: [],
+    searchFilmData: "",
     isLoading: false,
     error: null
 };
@@ -84,6 +85,7 @@ const reducer = (state = initialState, action) => {
             return {...state,
                 error: action.payload,
                 isLoading: false}
+
 
         default:
             return state;
