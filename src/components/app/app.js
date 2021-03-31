@@ -5,7 +5,8 @@ import ErrorBoundry from "../error/error-boundry/error-boundry";
 import RegistrationButton from "../header/registration-button";
 import Search from "../header/search";
 import Menu from "../header/menu";
-import MovieContainer from "../../containers/movie-container";
+import MovieDetailsSearchContainer from "../../containers/movie-container/movie-details-search-container";
+import MovieDetailsByIdContainer from "../../containers/movie-container/movie-details-by-id-container";
 
 import './app.css';
 
@@ -26,7 +27,8 @@ export default class App extends Component {
                       <Menu/>
                   </div>
                   <div>
-                      <MovieContainer/>
+                      <MovieDetailsSearchContainer/>
+                      <MovieDetailsByIdContainer/>
                   </div>
               </ErrorBoundry>
           </div>

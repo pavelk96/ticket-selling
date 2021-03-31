@@ -22,8 +22,8 @@ export default class KinopoiskService {
     }
 
     getFilmById = async (id) => {
-        const film = await this.getFilm(id);
-        return this._transformFilm(film);
+        const request = (id)
+        return await this.getFilm(request);
     };
 
     getFilmsByKeyWord = async (keyWord) => {
@@ -36,22 +36,6 @@ export default class KinopoiskService {
         return await this.getFilm(request);
     };
 
-    _transformFilm = (film) => {
-        return {
-            label: film?.data?.nameRu,
-            countries: (film?.data?.countries || []).map((country) => country.country),
-            description: film?.data?.description,
-            distributors: film?.data?.distributors,
-            filmId: film?.data?.filmId,
-            filmLength: film?.data?.filmLength,
-            facts: film?.data?.facts,
-            genres: film?.data?.genres,
-            posterUrl: film?.data?.posterUrl,
-            posterUrlPreview: film?.data?.posterUrlPreview,
-            premiereWorld: film?.data?.premiereWorld,
-            year: film?.data?.year
-        };
-    };
 
 };
 

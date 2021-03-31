@@ -1,18 +1,5 @@
 const initialState = {
-    filmData:{
-        countries: [],
-        label: "",
-        description: "",
-        distributors: "",
-        filmId: "",
-        filmLength: "",
-        facts: [],
-        genres: [],
-        posterUrl: "",
-        posterUrlPreview: "",
-        premiereWorld: "",
-        year: ""
-    },
+    filmData:[],
     filmsSearch: [],
     filmsList: [],
     filmsDigitalReleases: [],
@@ -27,20 +14,7 @@ const reducer = (state = initialState, action) => {
 
         case `GET_FILM_REQUEST`:
             return {...state,
-                filmData:{
-                    countries: [],
-                    label: "",
-                    description: "",
-                    distributors: "",
-                    filmId: "",
-                    filmLength: "",
-                    facts: [],
-                    genres: [],
-                    posterUrl: "",
-                    posterUrlPreview: "",
-                    premiereWorld: "",
-                    year: ""
-                },
+                filmData:[],
                 isLoading: true}
 
         case `GET_FILM_SUCCESS`:
