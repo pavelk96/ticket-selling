@@ -6,9 +6,13 @@ class MovieDetailsByIdContainer extends Component{
 
     render(){
 
+        const {id} = this.props;
+
+
 
         return(
             <div>
+                <h1>{id}</h1>
                 <h1>Продолжительность фильма: {(this.props.filmData?.data?.filmLength)}</h1>
             </div>
         )

@@ -6,7 +6,7 @@ import MoreDetailsButton from "../more-details-button";
 class MovieDetailsSearch extends Component{
 
     render(){
-       const {posterUrlPreview, nameRu, nameEn, filmLength, rating,ratingVoteCount, year, filmId } = this.props.film;
+       const {posterUrlPreview, nameRu, nameEn, filmLength, rating,ratingVoteCount, year, filmId } = this.props?.film;
 
        return(
             <div className="movie-details">

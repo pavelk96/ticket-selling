@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {fetchFilmData} from "../../../actions";
+import {withRouter} from 'react-router-dom';
 
 class MoreDetailsButton extends Component {
 
@@ -10,6 +11,7 @@ class MoreDetailsButton extends Component {
 
 
         const handleMoreDetailsButton =  (filmId) => {
+            const newPath =  `/film/${filmId}`
             return  this.props.fetchFilmData(filmId)
         };
 
