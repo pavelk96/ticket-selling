@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 
 
 
-export default class MovieSpecification extends Component{
+export default class MovieDetailsById extends Component{
     render(){
         return(
             <div>

@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import {fetchFilmData, fetchFilmsDigitalReleasesData, fetchFilmsSearchData} from "../../actions";
 import {connect} from "react-redux";
-import MovieDetails from "../../components/movie-item-block/movie-details";
+import MovieDetailsSearch from "../../components/movie-item-block/movie-details-search";
 import Spinner from "../../services/spinner";
 
 class MovieContainer extends Component{
 
     componentDidMount() {
-        this.props.fetchFilmsSearchData("Властелин");
+        console.log('Movie container! DidMount')
     };
 
 
@@ -15,7 +15,7 @@ class MovieContainer extends Component{
         const {isLoading, filmsSearch} = this.props;
         return (
             <>
-                { isLoading ? <Spinner /> : (filmsSearch || []).map(film => <MovieDetails key={film.filmId} film={film}/>) }
+                { isLoading ? <Spinner /> : (filmsSearch || []).map(film => <MovieDetailsSearch key={film.filmId} film={film}/>) }
             </>
 
         )

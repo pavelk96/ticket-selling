@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import './menu.css'
 
 
 export default class Menu extends Component {
@@ -8,7 +8,7 @@ export default class Menu extends Component {
     render () {
 
         return (
-            <div>
+            <div className="menu">
             <button  className="btn">Новости</button>
             <button  className="btn">Фильмы</button>
             <button  className="btn">Топ ожидаемых фильмов</button>
