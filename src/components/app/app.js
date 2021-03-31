@@ -28,7 +28,7 @@ export default class App extends Component {
                             <Menu/>
                         </div>
                         <div>
-                            <MovieDetailsSearchContainer/>
+                            <Route path="/" component={MovieDetailsSearchContainer} exact/>
                             <Route path="/film/:id"
                                     render={({match}) =>{
                                         const {id} = match.params

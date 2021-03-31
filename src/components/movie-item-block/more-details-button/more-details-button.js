@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {fetchFilmData} from "../../../actions";
+
 import {withRouter} from 'react-router-dom';
 
 class MoreDetailsButton extends Component {
@@ -8,11 +7,11 @@ class MoreDetailsButton extends Component {
     render () {
 
         const {filmId} = this.props;
-
+        const {history} = this.props;
 
         const handleMoreDetailsButton =  (filmId) => {
             const newPath =  `/film/${filmId}`
-            return  this.props.fetchFilmData(filmId)
+            history.push(newPath)
         };
 
         return (
@@ -24,17 +23,4 @@ class MoreDetailsButton extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        filmData: state.filmData,
-        isLoading: state.isLoading
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchFilmData: fetchFilmData(dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MoreDetailsButton);
+export default withRouter(MoreDetailsButton);
