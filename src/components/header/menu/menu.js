@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './menu.css'
+import {Link} from "react-router-dom";
 
 
 export default class Menu extends Component {
@@ -9,7 +10,7 @@ export default class Menu extends Component {
 
         return (
             <div className="menu">
-            <button  className="btn">Новости</button>
+            <Link to="/"><button className="btn" >Главная</button></Link>
             <button  className="btn">Фильмы</button>
             <button  className="btn">Топ ожидаемых фильмов</button>
             <button  className="btn">Цифровые релизы</button>

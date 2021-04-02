@@ -17,20 +17,20 @@ class MovieDetailsByIdContainer extends Component{
 
     render(){
 
-        const {id} = this.props;
-
-        console.log(this.props.filmData?.data?.filmLength);
+        console.log(this.props.filmData?.data);
 
         return(
             <div className="movie-details-by-id-container">
-                <img src={this.props.filmData?.data?.posterUrlPreview} alt="img" width="200" height="280" className="poster-preview"/>
+                <img src={this.props.filmData?.data?.posterUrl} alt="img" width="300" height="480" className="poster-preview"/>
                 <span>
                     <div><h1>{this.props.filmData?.data?.nameRu}<i>{this.props.filmData?.data?.nameEn + "  "}</i></h1></div>
                     <li>{this.props.filmData?.data?.year + "год"}</li>
                     <li>{this.props.filmData?.data?.description}</li>
-                    <li>Продолжительность фильма: {this.props.filmData?.data?.filmLength}</li>
-                    <li>Примьера в россии:  {this.props.filmData?.data?.premiereWorld}</li>
-                    <li>Слоган:  {this.props.filmData?.data?.slogan}</li>
+                    <li><b>Продолжительность фильма: </b>{this.props.filmData?.data?.filmLength}</li>
+                    <li><b>Примьера в россии:  </b>{this.props.filmData?.data?.premiereWorld}</li>
+                    <li><b>Слоган:  </b>{this.props.filmData?.data?.slogan}</li>
+                    <p><b>Факты:</b><br/></p>
+                    {this.props?.filmData?.data?.facts.map(facts => <p key={this.props.filmData?.data?.filmId + Math.random()*100}>{facts}<br/></p>)}
                 </span>
             </div>
         )
