@@ -26,6 +26,7 @@ class RegistrationButton extends Component {
 
         const content = isIsAuthorized ? buttonLogout : buttonLogin;
 
+
         console.log(isIsAuthorized)
 
         return (
