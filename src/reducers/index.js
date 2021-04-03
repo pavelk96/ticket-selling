@@ -5,12 +5,23 @@ const initialState = {
     filmsDigitalReleases: [],
     searchFilmData: "",
     isLoading: false,
+    IsAuthorized: false,
     error: null
 };
 
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
+
+        case `LOGIN_USER`:
+            return {...state,
+                IsAuthorized:true,
+            }
+
+        case `LOGOUT_USER`:
+            return {...state,
+                IsAuthorized:false,
+            }
 
         case `GET_FILM_REQUEST`:
             return {...state,
