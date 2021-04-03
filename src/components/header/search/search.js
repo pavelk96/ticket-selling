@@ -8,7 +8,7 @@ class Search extends Component {
 
 
 
-    handleSearchData  = debounce(e => this.props.fetchFilmsSearchData(e.target.value), 300);
+    handleSearchData  = debounce(e => this.props.fetchFilmsSearchData(e.target.value), 250);
 
 
 

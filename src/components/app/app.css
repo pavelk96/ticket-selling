@@ -1,8 +1,6 @@
 .header{
     display: flex;
     float: right;
-    contain: content;
-    height: 515px;
 }
 
 .btn {

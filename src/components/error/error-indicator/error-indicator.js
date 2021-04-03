@@ -5,7 +5,7 @@ import './error-indicator.css';
 const ErrorIndicator = () => {
     return (
             <div>
-                Что-то пошло не так, но мы уже работает над этим! ErrorIndicator;
+                Error-indicator
             </div>
     );
 };

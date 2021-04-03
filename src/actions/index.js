@@ -80,9 +80,22 @@ const fetchFilmsDigitalReleasesData = (dispatch) => (year, month) => {
         .catch((err) => dispatch(getFilmsDigitalReleasesError(err)));
 };
 
+const loginUser = () => {
+    return {
+        type: "LOGIN_USER"
+    }
+};
+
+const logoutUser = () => {
+    return {
+        type: "LOGOUT_USER"
+    }
+};
 
 export {
     fetchFilmData,
     fetchFilmsSearchData,
-    fetchFilmsDigitalReleasesData
+    fetchFilmsDigitalReleasesData,
+    loginUser,
+    logoutUser
 };

@@ -1,23 +1,11 @@
 const initialState = {
-    filmData:{
-        countries: [],
-        label: "",
-        description: "",
-        distributors: "",
-        filmId: "",
-        filmLength: "",
-        facts: [],
-        genres: [],
-        posterUrl: "",
-        posterUrlPreview: "",
-        premiereWorld: "",
-        year: ""
-    },
+    filmData:[],
     filmsSearch: [],
     filmsList: [],
     filmsDigitalReleases: [],
     searchFilmData: "",
     isLoading: false,
+    IsAuthorized: false,
     error: null
 };
 
@@ -25,22 +13,19 @@ const reducer = (state = initialState, action) => {
 
     switch (action.type) {
 
+        case `LOGIN_USER`:
+            return {...state,
+                IsAuthorized:true,
+            }
+
+        case `LOGOUT_USER`:
+            return {...state,
+                IsAuthorized:false,
+            }
+
         case `GET_FILM_REQUEST`:
             return {...state,
-                filmData:{
-                    countries: [],
-                    label: "",
-                    description: "",
-                    distributors: "",
-                    filmId: "",
-                    filmLength: "",
-                    facts: [],
-                    genres: [],
-                    posterUrl: "",
-                    posterUrlPreview: "",
-                    premiereWorld: "",
-                    year: ""
-                },
+                filmData:[],
                 isLoading: true}
 
         case `GET_FILM_SUCCESS`:
