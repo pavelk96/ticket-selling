@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import MovieDetailsByIdContainer from "../../../containers/movie-container/movie-details-by-id-container/movie-details-by-id-container";
+import BuyTicketButton from "../buy-ticket-button";
 
 
 class MovieDetailsById extends Component{
@@ -9,6 +10,7 @@ class MovieDetailsById extends Component{
         return(
             <div className="movie-details">
                 <MovieDetailsByIdContainer/>
+
             </div>
         )
     }

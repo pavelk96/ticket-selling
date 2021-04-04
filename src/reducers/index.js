@@ -5,7 +5,7 @@ const initialState = {
     filmsDigitalReleases: [],
     searchFilmData: "",
     isLoading: false,
-    IsAuthorized: false,
+    isAuthorized: false,
     error: null
 };
 
@@ -15,12 +15,12 @@ const reducer = (state = initialState, action) => {
 
         case `LOGIN_USER`:
             return {...state,
-                IsAuthorized:true,
+                isAuthorized:true,
             }
 
         case `LOGOUT_USER`:
             return {...state,
-                IsAuthorized:false,
+                isAuthorized:false,
             }
 
         case `GET_FILM_REQUEST`:

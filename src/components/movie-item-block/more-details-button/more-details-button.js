@@ -16,8 +16,8 @@ class MoreDetailsButton extends Component {
 
         return (
             <div>
-                <button className="child-active btn">Трейлер</button>
-                <button className="child-active btn"  onClick={() => handleMoreDetailsButton(filmId)}>Подробнее</button>
+                <button className="btn btn-primary">Трейлер</button>
+                <button className="btn btn-primary"  onClick={() => handleMoreDetailsButton(filmId)}>Подробнее</button>
             </div>
         )
     }

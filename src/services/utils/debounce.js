@@ -1,4 +1,4 @@
-export default (f, ms) => {
+ const debounce = (f, ms) => {
     let timer = null;
 
     return function(...args) {
@@ -14,3 +14,5 @@ export default (f, ms) => {
         timer = setTimeout(onComplete, ms);
     };
 };
+
+ export default debounce;

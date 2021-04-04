@@ -16,7 +16,7 @@ class Search extends Component {
         return (
             <div>
                 <form>
-                    <input type="text" name="Search" placeholder="Search"  onChange={this.handleSearchData} />
+                    <input className="form-control mr-sm-2" type="text" name="Search" placeholder="Search"  onChange={this.handleSearchData} />
                 </form>
             </div>
         )
