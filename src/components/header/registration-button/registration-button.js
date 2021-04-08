@@ -1,36 +1,59 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {loginUser, logoutUser} from "../../../actions";
+import './registration-button.css';
 
 class RegistrationButton extends Component {
+
+    state = {
+        showMenuProfile: false
+    }
+
     render () {
 
-        const {isIsAuthorized} = this.props;
+        const {isAuthorized} = this.props;
 
         const handleLoginButton = () => {
             this.props.loginUser()
         };
 
         const handleLogoutButton = () => {
+            this.setState({showMenuProfile: false})
             this.props.logoutUser()
         };
 
 
         const buttonLogin = (
-            <button className="btn" onClick={() => {handleLoginButton()}}>Login</button>
+            <button className="btn btn-primary" onClick={() => {handleLoginButton()}}>Login</button>
         );
 
         const buttonLogout = (
-            <button className="btn" onClick={() => {handleLogoutButton()}}>Logout</button>
+            <div>
+                <button className="btn btn-primary dropdown-toggle" onClick={() => {showMenuProfileClick()}}>$UserName</button>
+            </div>
         );
 
-        const content = isIsAuthorized ? buttonLogout : buttonLogin;
+        const showMenuProfileClick = () =>{
+            this.setState({showMenuProfile: !this.state.showMenuProfile})
+        }
 
-        console.log(isIsAuthorized)
+        const content = isAuthorized ? buttonLogout : buttonLogin;
+        
+        const menuProfile = (
+            <div className="profile-menu">
+                <button className="btn btn-primary">Мой профиль</button>
+                <button className="btn btn-primary">Мои фильмы</button>
+                <button className="btn btn-primary" onClick={() => {handleLogoutButton()}}>Logout</button>
+            </div>
+        );
+
+        const contentMenuProfile = this.state.showMenuProfile ? menuProfile : null;
+
 
         return (
             <div>
                 {content}
+                {contentMenuProfile}
             </div>
         )
     }
@@ -38,7 +61,7 @@ class RegistrationButton extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isIsAuthorized: state.IsAuthorized
+        isAuthorized: state.isAuthorized
     }
 };
 

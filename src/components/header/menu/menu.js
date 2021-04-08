@@ -10,11 +10,11 @@ export default class Menu extends Component {
 
         return (
             <div className="menu">
-            <Link to="/"><button className="btn" >Главная</button></Link>
-            <button  className="btn">Фильмы</button>
-            <button  className="btn">Топ ожидаемых фильмов</button>
-            <button  className="btn">Цифровые релизы</button>
-            <button  className="btn">Акции</button>
+            <Link to="/"><button className="btn btn-primary" >Главная</button></Link>
+            <button  className="btn btn-primary ">Фильмы</button>
+            <button  className="btn btn-primary">Топ ожидаемых фильмов</button>
+            <button  className="btn btn-primary">Цифровые релизы</button>
+            <button  className="btn btn-primary">Акции</button>
             </div>
         )
     };

@@ -15,7 +15,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className="app">
                 <Router>
                     <ErrorBoundry>
                         <div className="header">
@@ -39,5 +39,7 @@ export default class App extends Component {
         )
     }
 }
+
+
 
 
