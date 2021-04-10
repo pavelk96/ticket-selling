@@ -8,6 +8,10 @@ import Menu from "../header/menu";
 import MovieDetailsSearchContainer from "../../containers/movie-container/movie-details-search-container";
 import MovieDetailsByIdContainer from "../../containers/movie-container/movie-details-by-id-container";
 import './app.css';
+import CinemaHallContainer from "../../containers/movie-container/cinema-hall-container";
+
+
+
 
 
 export default class App extends Component {
@@ -26,6 +30,11 @@ export default class App extends Component {
                             <Menu/>
                         </div>
                         <div>
+
+                        </div>
+
+                        <div>
+                            <CinemaHallContainer/>
                             <Route path="/" component={MovieDetailsSearchContainer} exact/>
                             <Route path="/film/:id"
                                    render={({match}) => {
