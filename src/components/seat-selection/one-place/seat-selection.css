@@ -1,4 +1,7 @@
 .place {
+    margin-left: 9px;
+    margin-top: 9px;
+    margin-right: 9px;
     display: inline-block;
     justify-content: flex-start;
     cursor: pointer;
@@ -6,6 +9,7 @@
     height: 24px;
     background-image: url(/src/images/place1.png);
     text-align: center;
+    color: #5d2697;
 }
 
 .place:hover {

@@ -1,0 +1,13 @@
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+    padding: 60px;
+}
+
+.centered {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

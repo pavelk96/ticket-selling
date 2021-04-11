@@ -1,12 +1,11 @@
 const initialState = {
     filmData:[],
     filmsSearch: [],
-    filmsList: [],
     filmsDigitalReleases: [],
-    searchFilmData: "",
     isLoading: false,
     isAuthorized: false,
-    error: null
+    error: null,
+    filmIdSelectedMovie: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,7 +28,7 @@ const reducer = (state = initialState, action) => {
                 isLoading: true}
 
         case `GET_FILM_SUCCESS`:
-            console.log(action)
+            console.log("из reducers",action)
             return {...state,
                 filmData: action.payload,
                 isLoading: false}
@@ -70,6 +69,11 @@ const reducer = (state = initialState, action) => {
             return {...state,
                 error: action.payload,
                 isLoading: false}
+
+        case 'PUSH_SELECTED_FILM_ID':
+            console.log(action.payload)
+            return {...state,
+                filmIdSelectedMovie: action.payload}
 
 
         default:

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import OnePlace from "../../../components/seat-selection/one-place"
+import "./cinema-hall-container.css";
+
+import {connect} from "react-redux";
 
 
 class CinemaHallContainer extends Component {
 
-    hallGrid = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
     state = {
         selectedPlaceNumber: []
     };
-
 
     handleSelectedPlace = (place) => {
 
@@ -35,28 +35,42 @@ class CinemaHallContainer extends Component {
 
     renderHallGrid = () => {
         let gridArr = [];
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 9; i++) {
             let placeArr = [];
             for (let n =1; n<=10; n++) {
                 const place = `${i.toString()}.${n.toString()}`;
-                placeArr = [...placeArr, <OnePlace key={place} place={n.toString()} handleSelectedPlace={() => this.handleSelectedPlace(place)} />];
+                placeArr = [...placeArr, <OnePlace  key={place} place={n.toString()} handleSelectedPlace={() => this.handleSelectedPlace(place)} />];
             }
-            gridArr = [...gridArr,<div key={i} >{placeArr}</div> ]
+            gridArr = [...gridArr,<div key={i} >Ряд: {i}{placeArr}</div> ]
         }
-        console.log(gridArr)
         return gridArr;
-    }
+    };
+
 
     render() {
 
+        const {id} = this.props;
 
-        console.log(this.state.selectedPlaceNumber)
         return (
             <div>
-                {this.renderHallGrid()}
+                {id}
+            <div className="container">
+                <img src="http://www.atrium-omsk.ru/images/tpl/screen.png" alt= "img"/>
+                <div className="centered">
+                    { this.renderHallGrid()}
+                    <button className="btn btn-success" >Купить</button>
+                </div>
+            </div>
             </div>
         )
     }
 }
 
-export default CinemaHallContainer;
+const mapStateToProps = (state) => {
+    return {
+        filmData: state.filmData
+    }
+};
+
+
+export default connect(mapStateToProps, null)(CinemaHallContainer);

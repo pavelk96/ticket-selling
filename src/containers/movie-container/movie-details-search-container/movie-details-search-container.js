@@ -1,29 +1,42 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import MovieDetailsSearch from "../../../components/movie-item-block/movie-details-search";
-import Spinner from "../../../services/spinner";
+
+import MoreDetailsButton from "../../../components/movie-item-block/more-details-button";
+import BuyTicketButton from "../../../components/movie-item-block/buy-ticket-button";
 
 class MovieDetailsSearchContainer extends Component{
 
+render(){
+    const {film, isAuthorized } = this.props;
+    const {posterUrlPreview, nameRu, nameEn, filmLength, rating,ratingVoteCount, year, filmId } = film;
 
-
-    render(){
-        const {isLoading, filmsSearch} = this.props;
-        return (
-            <>
-                { isLoading ? <Spinner /> : (filmsSearch || []).map(film => <MovieDetailsSearch key={film.filmId} film={film} />) }
-            </>
-
-        )
-    }
+    return(
+        <div className="movie-details">
+            <img src={posterUrlPreview} alt="img" width="200" height="280" className="poster-preview"/>
+            <span>
+                    <h1>{nameRu}</h1>
+                    <i>{nameEn + "  "}</i>
+                    <i>{year + "год"}</i>
+                    <li>{this.props?.film.genres.map(genres => <i key={filmId + genres.genre}>{genres.genre + " "}</i>)}</li>
+                    <li>Продолжительность фильма: {filmLength}</li>
+                    <li>Рейтинг фильма:{rating} Количество отценок: {ratingVoteCount}  </li>
+                    <MoreDetailsButton filmId={filmId}/>
+                {isAuthorized && <BuyTicketButton filmId={filmId}/>}
+                </span>
+        </div>
+    )
+}
 }
 
 const mapStateToProps = (state) => {
     return {
-        filmsSearch: state.filmsSearch,
-        isLoading: state.isLoading
+        filmData: state.filmData,
+        isLoading: state.isLoading,
+        isAuthorized: state.isAuthorized
     };
 };
 
+export default connect(mapStateToProps)(MovieDetailsSearchContainer)
 
-export default connect(mapStateToProps)(MovieDetailsSearchContainer);
+
+

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {fetchFilmsSearchData} from "../../../actions";
 import {debounce} from "../../../services/utils";
+import "./search.css";
 
 class Search extends Component {
 
