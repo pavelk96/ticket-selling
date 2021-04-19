@@ -5,11 +5,7 @@ import './movie-details-by-id-container.css';
 import BuyTicketButton from "../../../components/movie-item-block/buy-ticket-button";
 
 
-
-
 class MovieDetailsByIdContainer extends Component{
-
-
 
     componentDidMount() {
         this.props.fetchFilmData(this.props.id)
@@ -33,7 +29,7 @@ class MovieDetailsByIdContainer extends Component{
                     <p><b>Факты:</b><br/></p>
                     {data?.facts.map(facts => <p key={data?.filmId + Math.random()*100}>{facts}<br/></p>)}
                 </span>
-                {isAuthorized && <BuyTicketButton/>}
+                {isAuthorized && <BuyTicketButton filmId={data?.filmId}/>}
             </div>
         )
     }

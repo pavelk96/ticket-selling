@@ -1,0 +1,26 @@
+.place {
+    margin-left: 9px;
+    margin-top: 9px;
+    margin-right: 9px;
+    display: inline-block;
+    justify-content: flex-start;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    background-image: url(/src/images/place1.png);
+    text-align: center;
+    color: #5d2697;
+}
+
+.place:hover {
+    color: #5d2697;
+    box-shadow: inset 0 0 0 3px #5d2697;
+}
+
+.place-selected {
+    background-image: url(/src/images/place2.png);
+    text-align: center;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}

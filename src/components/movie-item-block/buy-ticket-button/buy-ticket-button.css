@@ -1,0 +1,17 @@
+.button-buy-ticket{
+    padding: 10px 35px;
+    overflow:hidden;
+}
+
+.button-buy-ticket:before {
+    font-family: FontAwesome;
+    content:"\f07a";
+    position: relative;
+    left: -30px;
+    margin-right: 3px;
+    transition: all 700ms ease;
+}
+
+.button-buy-ticket:hover:before {
+    left: 1px;
+}
