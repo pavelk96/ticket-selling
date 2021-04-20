@@ -1,0 +1,5 @@
+.regitration-container {
+    width: 25%;
+    display: flex;
+    flex-flow: column;
+}

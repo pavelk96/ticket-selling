@@ -8,6 +8,7 @@ import Menu from "../header/menu";
 import MovieDetailsSearch from "../movie-item-block/movie-details-search/movie-details-search";
 import MovieDetailsByIdContainer from "../../containers/movie-container/movie-details-by-id-container";
 import CinemaHallContainer from "../../containers/movie-container/cinema-hall-container";
+import RegistrationPage from "../../pages/registration-page";
 
 import './app.css';
 
@@ -47,6 +48,7 @@ export default class App extends Component {
                                        const {id} = match.params
                                        return <CinemaHallContainer id={id}/>;
                                    }}/>
+                            <Route path="/registration" component={RegistrationPage} exact/>
                         </div>
                     </ErrorBoundry>
                 </Router>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {loginUser, logoutUser} from "../../../actions";
 import './registration-button.css';
+import {Link} from "react-router-dom";
 
 class RegistrationButton extends Component {
 
@@ -24,7 +25,10 @@ class RegistrationButton extends Component {
 
 
         const buttonLogin = (
-            <button className="btn btn-primary" onClick={() => {handleLoginButton()}}>Login</button>
+            <div>
+                <button className="btn btn-primary" onClick={() => {handleLoginButton()}}>Вход</button>
+                <Link to="/registration" className="btn btn-primary">Регистрация</Link>
+            </div>
         );
 
         const buttonLogout = (
@@ -38,7 +42,7 @@ class RegistrationButton extends Component {
         }
 
         const content = isAuthorized ? buttonLogout : buttonLogin;
-        
+
         const menuProfile = (
             <div className="profile-menu">
                 <button className="btn btn-primary">Мой профиль</button>

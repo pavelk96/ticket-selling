@@ -19,7 +19,7 @@ export default class KinopoiskService {
                 });
         }
          )
-    }
+    };
 
     getFilmById = async (id) => {
         const request = (id)
@@ -35,7 +35,5 @@ export default class KinopoiskService {
         const request = await (`${this._apiKeyWord}releases?year=${year}&month=${month}&page=1`);
         return await this.getFilm(request);
     };
-
-
 };
 
