@@ -1,6 +1,5 @@
 import React,{Component} from "react";
-import {Link} from 'react-router-dom';
-import RegistrationContainer from "../containers/auth/registration";
+import RegistrationContainer from "../components/auth/registration-form/registration-container"
 
 
 class RegistrationPage extends Component {

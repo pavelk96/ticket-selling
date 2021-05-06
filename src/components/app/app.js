@@ -1,4 +1,5 @@
 import React,{Component} from "react";
+import {connect} from "react-redux";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 
 import ErrorBoundry from "../error/error-boundry/error-boundry";
@@ -9,6 +10,7 @@ import MovieDetailsSearch from "../movie-item-block/movie-details-search/movie-d
 import MovieDetailsByIdContainer from "../../containers/movie-container/movie-details-by-id-container";
 import CinemaHallContainer from "../../containers/movie-container/cinema-hall-container";
 import RegistrationPage from "../../pages/registration-page";
+import {checkLoginUser} from "../../actions";
 
 import './app.css';
 
@@ -17,45 +19,61 @@ import './app.css';
 
 
 
-export default class App extends Component {
 
+
+class App extends Component {
+
+    componentDidMount() {
+        this.props.checkLoginUser()
+    }
 
     render() {
+
+        const {isAuthorized} = this.props;
+
         return (
-            <div className="app">
                 <Router>
                     <ErrorBoundry>
-                        <div className="header">
-                            <Search/>
-                            <RegistrationButton/>
-                        </div>
                         <div>
+                            <RegistrationButton/>
                             <Menu/>
                         </div>
-                        <div>
 
-                        </div>
-
-                        <div>
-                            <Route path="/" component={MovieDetailsSearch} exact/>
-                            <Route path="/film/:id"
-                                   render={({match}) => {
-                                       const {id} = match.params
-                                       return <MovieDetailsByIdContainer id={id}/>;
-                                   }}/>
-                            <Route path="/buy-ticket/:id"
-                                   render={({match}) => {
-                                       const {id} = match.params
-                                       return <CinemaHallContainer id={id}/>;
-                                   }}/>
                             <Route path="/registration" component={RegistrationPage} exact/>
-                        </div>
+                        {
+                            isAuthorized && <div className="header">
+                                <Search/>
+                                <Route path="/" component={MovieDetailsSearch} exact/>
+                                <Route path="/film/:id"
+                                       render={({match}) => {
+                                           const {id} = match.params
+                                           return <MovieDetailsByIdContainer id={id}/>;
+                                       }}/>
+                                <Route
+                                    path="/buy-ticket/:id"
+                                    render={({match: {params}}) => <CinemaHallContainer id={params?.id}/>}
+                                />
+                            </div>
+                        }
                     </ErrorBoundry>
                 </Router>
-            </div>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        isAuthorized: state.isAuthorized
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        checkLoginUser: () => dispatch(checkLoginUser())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 
 

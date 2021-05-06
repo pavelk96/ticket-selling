@@ -8,9 +8,23 @@ const initialState = {
     filmIdSelectedMovie: [],
 };
 
+const logOutUserThunk = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+};
+
+const loginUserThunk = (state) => {
+    if (localStorage.getItem("token")){
+        return {...state, isAuthorized:true }
+    }
+}
+
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
+
+        case `CHECK_LOGIN_USER`:
+            return loginUserThunk(state);
 
         case `LOGIN_USER`:
             return {...state,
@@ -18,6 +32,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case `LOGOUT_USER`:
+            logOutUserThunk()
             return {...state,
                 isAuthorized:false,
             }
@@ -25,7 +40,8 @@ const reducer = (state = initialState, action) => {
         case `GET_FILM_REQUEST`:
             return {...state,
                 filmData:[],
-                isLoading: true}
+                isLoading: true
+            }
 
         case `GET_FILM_SUCCESS`:
             console.log("из reducers",action)
@@ -79,6 +95,8 @@ const reducer = (state = initialState, action) => {
         default:
             return state;
     }
+
+
 };
 
 export default reducer;

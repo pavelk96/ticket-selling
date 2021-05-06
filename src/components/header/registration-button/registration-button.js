@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {loginUser, logoutUser} from "../../../actions";
+import {logoutUser} from "../../../actions";
 import './registration-button.css';
-import {Link} from "react-router-dom";
+import AuthorizationForm from "../../auth/ authorization-form";
+
 
 class RegistrationButton extends Component {
 
@@ -14,26 +15,14 @@ class RegistrationButton extends Component {
 
         const {isAuthorized} = this.props;
 
-        const handleLoginButton = () => {
-            this.props.loginUser()
-        };
-
         const handleLogoutButton = () => {
-            this.setState({showMenuProfile: false})
-            this.props.logoutUser()
+            this.setState({showMenuProfile: false});
+            this.props.logoutUser();
         };
-
-
-        const buttonLogin = (
-            <div>
-                <button className="btn btn-primary" onClick={() => {handleLoginButton()}}>Вход</button>
-                <Link to="/registration" className="btn btn-primary">Регистрация</Link>
-            </div>
-        );
 
         const buttonLogout = (
             <div>
-                <button className="btn btn-primary dropdown-toggle" onClick={() => {showMenuProfileClick()}}>$UserName</button>
+                <button className="btn btn-primary dropdown-toggle user-name"  onClick={() => {showMenuProfileClick()}}>$UserName</button>
             </div>
         );
 
@@ -41,7 +30,7 @@ class RegistrationButton extends Component {
             this.setState({showMenuProfile: !this.state.showMenuProfile})
         }
 
-        const content = isAuthorized ? buttonLogout : buttonLogin;
+        const content = isAuthorized ? buttonLogout : <AuthorizationForm/>;
 
         const menuProfile = (
             <div className="profile-menu">
@@ -71,7 +60,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginUser: () => dispatch(loginUser()),
         logoutUser: () => dispatch(logoutUser())
     }
 };
