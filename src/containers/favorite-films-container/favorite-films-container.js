@@ -1,15 +1,23 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
-import {fetchFavoriteFilmsData} from "../../actions/index";
+import {fetchFavoriteFilm, fetchFavoriteFilmsId} from "../../actions/index";
 import Spinner from "../../services/spinner";
+import MovieDetailsSearchContainer
+    from "../movie-container/movie-details-search-container/movie-details-search-container";
 
 class FavoriteFilmsContainer extends Component{
 
-    render(){
 
+    componentDidMount() {
+        this.props.fetchFavoriteFilm()
+
+    };
+
+    render(){
+        const {isLoading, favoriteFilmsData} = this.props;
         return(
             <div>
-                {this.props.isLoading ? <Spinner/> : (this.props?.favoriteFilms || []).map(filmId => <p key={filmId}>{filmId}<br/></p>)}
+                { isLoading ? <Spinner /> : (favoriteFilmsData || []).map(film => <MovieDetailsSearchContainer key={film.filmId} film={film} />) }
             </div>
         )
     }
@@ -18,13 +26,15 @@ class FavoriteFilmsContainer extends Component{
 const mapStateToProps = (state) => {
     return {
         isLoading: state.isLoading,
-        favoriteFilms: state.favoriteFilms
+        favoriteFilmsId: state.favoriteFilmsId, // Список ид фильмов
+        favoriteFilmsData: state.favoriteFilmsData // Ин-ция о фильмах
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFavoriteFilmsData : fetchFavoriteFilmsData(dispatch)
+        fetchFavoriteFilm : fetchFavoriteFilm(dispatch),
+        fetchFavoriteFilmsId: fetchFavoriteFilmsId(dispatch)
     }
 };
 

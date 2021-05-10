@@ -1,4 +1,4 @@
-export default class AuthServices {
+export default class UserInfo {
     request = async(url, method = "GET", body = null, headers = {}) => {
         try {
             if (body) {

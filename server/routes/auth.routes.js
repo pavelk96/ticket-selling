@@ -1,10 +1,10 @@
-
 const {Router} = require('express')
 const bcrypt = require('bcryptjs')
 const config = require('config')
 const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
 const User = require('../models/User')
+const UserInfo = require('../models/User-Info')
 const router = Router()
 
 // /api/auth/register
@@ -34,8 +34,9 @@ router.post(
 
             const hashedPassword = await bcrypt.hash(password, 12);
             const user = new User({email, password:hashedPassword});
-
-            await user.save()
+            const newUser = await user.save()
+            const userInfo = new UserInfo({id: newUser._id});
+            await userInfo.save()
 
             res.status(201).json({message: "Пользователь создан"})
 
@@ -89,32 +90,5 @@ router.post(
             console.log(e)
         }
     })
-
-// /api/auth/favorite-films
-router.post(
-    '/favorite-films',
-    async (req, res) => {
-        try {
-            const {userId} = req.body;
-            const user = await User.findOne({_id: userId});
-            const {favoriteFilms} = user;
-            res.json(favoriteFilms)
-        } catch (e) {
-            console.log("ошибка",e)
-        }
-    }
-)
-
-// /api/auth/add-favorite-film
-router.post(
-    '/add-favorite-film',
-    async (req, res) => {
-        try {
-            const {filmId} = req.body;
-        } catch (e) {
-            console.log(e)
-        }
-    }
-)
 
 module.exports = router

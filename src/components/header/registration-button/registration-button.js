@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {fetchFavoriteFilmsData, logoutUser} from "../../../actions";
+import {fetchFavoriteFilm, fetchFavoriteFilmsId, logoutUser} from "../../../actions";
 import './registration-button.css';
 import AuthorizationForm from "../../auth/ authorization-form";
-import AuthServices from "../../../services/auth";
 import { withRouter } from "react-router";
 
 
@@ -16,18 +15,18 @@ class RegistrationButton extends Component {
     };
 
     getFavoriteFilms  = async () => {
+
         this.props.history.push("/favorite-films");
-        await this.props.fetchFavoriteFilmsData()
     };
 
     render () {
-
         const {isAuthorized} = this.props;
 
         const handleLogoutButton = () => {
             this.setState({showMenuProfile: false});
             this.props.logoutUser();
         };
+
 
         const buttonLogout = (
             <div>
@@ -63,14 +62,17 @@ class RegistrationButton extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuthorized: state.isAuthorized
+        isAuthorized: state.isAuthorized,
+        favoriteFilmsData: state.favoriteFilmsData,
+        favoriteFilmsId: state.favoriteFilmsId
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         logoutUser: () => dispatch(logoutUser()),
-        fetchFavoriteFilmsData : fetchFavoriteFilmsData(dispatch)
+        fetchFavoriteFilmsId : fetchFavoriteFilmsId(dispatch),
+        fetchFavoriteFilm: fetchFavoriteFilm(dispatch)
     }
 };
 

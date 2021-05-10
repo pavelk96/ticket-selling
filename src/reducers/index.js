@@ -1,4 +1,3 @@
-import AuthServices from "../services/auth";
 
 const initialState = {
     filmData:[],
@@ -7,7 +6,8 @@ const initialState = {
     isLoading: false,
     isAuthorized: false,
     error: null,
-    favoriteFilms: [],
+    favoriteFilmsId: [], //ид фильмов
+    favoriteFilmsData: [] //информация об избранных фильмах
 };
 
 
@@ -23,7 +23,6 @@ const loginUserThunk = (state) => {
         return {...state, isAuthorized:true }
     }
 };
-
 
 
 
@@ -100,20 +99,36 @@ const reducer = (state = initialState, action) => {
             return {...state,
                 filmIdSelectedMovie: action.payload}
 
-        case `GET_FAVORITE_FILMS_REQUEST`:
+        case `GET_FAVORITE_FILMS_ID_REQUEST`:
             return {...state,
-                favoriteFilms:[],
+                favoriteFilmsId:[],
                 isLoading: true}
 
-        case `GET_FAVORITE_FILMS_SUCCESS`:
-            console.log("из reducers",action)
+        case `GET_FAVORITE_FILMS_ID_SUCCESS`:
+            console.log(action.payload)
             return {...state,
-                favoriteFilms: action.payload,
+                favoriteFilmsId: action.payload,
                 isLoading: false}
 
-        case `GET_FAVORITE_FILMS_ERROR`:
+        case `GET_FAVORITE_FILMS_ID_ERROR`:
             return {...state,
-                favoriteFilms: action.payload,
+                favoriteFilmsId: action.payload,
+                isLoading: false}
+//
+        case `GET_FAVORITE_FILM_REQUEST`:
+            return {...state,
+                favoriteFilmsData: [],
+                isLoading: true}
+
+        case `GET_FAVORITE_FILM_SUCCESS`:
+            console.log(action.payload)
+            return {...state,
+                favoriteFilmsData: action.payload,
+                isLoading: false}
+
+        case `GET_FAVORITE_FILM_ERROR`:
+            return {...state,
+                error: action.payload,
                 isLoading: false}
 
         default:

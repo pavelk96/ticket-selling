@@ -1,8 +1,8 @@
 import KinopoiskService from "../services/kinopoisk-service";
-import AuthServices from "../services/auth";
+import UserInfo from "../services/user-info";
 
 const kinopoiskService = new KinopoiskService();
-const authServices = new AuthServices();
+const userInfo = new UserInfo();
 
 const getFilmRequest = () => {
     return {
@@ -99,34 +99,75 @@ const checkLoginUser = () => {
         type: "CHECK_LOGIN_USER"
     }
 };
+// Получаем id избранных фильмов
 
 const getFavoriteFilmsRequest = () => {
     return {
-        type: 'GET_FAVORITE_FILMS_REQUEST'
+        type: 'GET_FAVORITE_FILMS_ID_REQUEST'
     };
 };
 
 const getFavoriteFilmsSuccess = (favoriteFilms) => {
     return {
-        type: 'GET_FAVORITE_FILMS_SUCCESS',
+        type: 'GET_FAVORITE_FILMS_ID_SUCCESS',
         payload: favoriteFilms
     };
 };
 
 const getFavoriteFilmsError = () => {
     return {
-        type: 'GET_FAVORITE_FILMS_ERROR'
+        type: 'GET_FAVORITE_FILMS_ID_ERROR'
     };
 };
 
-
-
-const fetchFavoriteFilmsData = (dispatch) => () => {
+const fetchFavoriteFilmsId = (dispatch) => () => {
     dispatch(getFavoriteFilmsRequest());
         const userId =  localStorage.getItem("userId");
-        authServices.request('/api/auth/favorite-films', 'POST', {userId})
+        const token =  localStorage.getItem("token");
+        userInfo.request('/api/user-info/favorite-films', 'POST', {userId, token})
         .then((favoriteFilms) => dispatch(getFavoriteFilmsSuccess(favoriteFilms)))
         .catch((err) => dispatch(getFavoriteFilmsError(err)));
+};
+// Получаем инф-цию об избранных фильмах по id (favoriteFilmsId)
+const getFavoriteFilmRequest = () => {
+    return {
+        type: 'GET_FAVORITE_FILM_REQUEST'
+    };
+};
+
+const getFavoriteFilmSuccess = (favoriteFilmsData) => {
+    return {
+        type: 'GET_FAVORITE_FILM_SUCCESS',
+        payload: favoriteFilmsData
+    };
+};
+
+const getFavoriteFilmError = () => {
+    return {
+        type: 'GET_FAVORITE_FILM_ERROR'
+    };
+};
+
+const fetchFavoriteFilm = (dispatch) => async () => {
+    dispatch(getFavoriteFilmRequest());
+    const token =  localStorage.getItem("token");
+    const favoriteFilmsId = await userInfo.request('/api/user-info/favorite-films', 'POST', {token})
+        .then(favoriteFilms => favoriteFilms)
+        .catch(err => dispatch(getFavoriteFilmsError(err)))
+
+
+    if (favoriteFilmsId && favoriteFilmsId.length === 0) {
+        dispatch(getFavoriteFilmSuccess([]));
+    }
+
+    let filmDataArr = [];
+    for (let i = 0; i < favoriteFilmsId.length; i++) {
+        const filmData = await kinopoiskService.getFilmById(favoriteFilmsId[i])
+            .then(film => film?.data)
+            .catch(err => dispatch(getFavoriteFilmError(err)));
+        filmDataArr = [...filmDataArr, filmData];
+    }
+    dispatch(getFavoriteFilmSuccess(filmDataArr));
 };
 
 
@@ -138,5 +179,6 @@ export {
     loginUser,
     logoutUser,
     checkLoginUser,
-    fetchFavoriteFilmsData
+    fetchFavoriteFilmsId,
+    fetchFavoriteFilm
 };

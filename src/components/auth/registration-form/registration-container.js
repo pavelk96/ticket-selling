@@ -1,9 +1,10 @@
 import React,{Component} from "react";
 import './registration-container.css';
-import AuthServices from "../../../services/auth";
+import AuthServices from "../../../services/user-info";
 import {connect} from "react-redux";
 import {loginUser} from "../../../actions";
 import { withRouter } from "react-router";
+
 
 
 const authServices = new AuthServices();
@@ -76,8 +77,8 @@ class RegistrationContainer extends Component {
                         </div>
                     </div>
                     </div>
-                <button className="btn" onClick={this.handleRegistration}>Зарегистрироваться</button>
-                <button className="btn" onClick={this.loginHandler}>Войти</button>
+                        <button className="btn" onClick={this.handleRegistration}>Зарегистрироваться</button>
+                        <button className="btn" onClick={this.loginHandler}>Войти</button>
             </div>
         )
     }
@@ -85,7 +86,8 @@ class RegistrationContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuthorized: state.isAuthorized
+        isAuthorized: state.isAuthorized,
+        isLoading: state.isLoading
     }
 };
 
