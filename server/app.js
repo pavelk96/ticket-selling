@@ -3,7 +3,7 @@ const config = require('config');
 const mongoose = require('mongoose');
 
 const app = express()
-console.log('start')
+console.log('111')
 app.use(express.json({extended:true}))
 
 app.use('/api/auth', require('./routes/auth.routes'))

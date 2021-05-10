@@ -92,18 +92,19 @@ const logoutUser = () => {
     }
 };
 
-const pushSelectedFilmId = (filmId) => {
+const checkLoginUser = () => {
     return {
-        type: 'PUSH_SELECTED_FILM_ID',
-        payload: filmId
+        type: "CHECK_LOGIN_USER"
     }
-}
+};
+
+
 
 export {
     fetchFilmData,
     fetchFilmsSearchData,
     fetchFilmsDigitalReleasesData,
-    pushSelectedFilmId,
     loginUser,
-    logoutUser
+    logoutUser,
+    checkLoginUser
 };

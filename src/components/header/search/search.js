@@ -15,7 +15,7 @@ class Search extends Component {
 
     render () {
         return (
-            <div>
+            <div className="search">
                 <form>
                     <input className="form-control mr-sm-2" type="text" name="Search" placeholder="Search"  onChange={this.handleSearchData} />
                 </form>

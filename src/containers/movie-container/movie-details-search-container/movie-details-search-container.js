@@ -21,7 +21,7 @@ render(){
                     <li>Продолжительность фильма: {filmLength}</li>
                     <li>Рейтинг фильма:{rating} Количество отценок: {ratingVoteCount}  </li>
                     <MoreDetailsButton filmId={filmId}/>
-                {isAuthorized && <BuyTicketButton filmId={filmId}/>}
+                {isAuthorized && <BuyTicketButton filmId={filmId} year={year}/>}
                 </span>
         </div>
     )
