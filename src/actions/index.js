@@ -1,6 +1,8 @@
 import KinopoiskService from "../services/kinopoisk-service";
+import AuthServices from "../services/auth";
 
 const kinopoiskService = new KinopoiskService();
+const authServices = new AuthServices();
 
 const getFilmRequest = () => {
     return {
@@ -98,6 +100,35 @@ const checkLoginUser = () => {
     }
 };
 
+const getFavoriteFilmsRequest = () => {
+    return {
+        type: 'GET_FAVORITE_FILMS_REQUEST'
+    };
+};
+
+const getFavoriteFilmsSuccess = (favoriteFilms) => {
+    return {
+        type: 'GET_FAVORITE_FILMS_SUCCESS',
+        payload: favoriteFilms
+    };
+};
+
+const getFavoriteFilmsError = () => {
+    return {
+        type: 'GET_FAVORITE_FILMS_ERROR'
+    };
+};
+
+
+
+const fetchFavoriteFilmsData = (dispatch) => () => {
+    dispatch(getFavoriteFilmsRequest());
+        const userId =  localStorage.getItem("userId");
+        authServices.request('/api/auth/favorite-films', 'POST', {userId})
+        .then((favoriteFilms) => dispatch(getFavoriteFilmsSuccess(favoriteFilms)))
+        .catch((err) => dispatch(getFavoriteFilmsError(err)));
+};
+
 
 
 export {
@@ -106,5 +137,6 @@ export {
     fetchFilmsDigitalReleasesData,
     loginUser,
     logoutUser,
-    checkLoginUser
+    checkLoginUser,
+    fetchFavoriteFilmsData
 };

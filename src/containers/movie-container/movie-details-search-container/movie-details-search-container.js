@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 
 import MoreDetailsButton from "../../../components/movie-item-block/more-details-button";
 import BuyTicketButton from "../../../components/movie-item-block/buy-ticket-button";
+import AddFavoriteFilmButton from "../../../components/movie-item-block/add-favorite-film-button";
 
 class MovieDetailsSearchContainer extends Component{
 
@@ -22,6 +23,7 @@ render(){
                     <li>Рейтинг фильма:{rating} Количество отценок: {ratingVoteCount}  </li>
                     <MoreDetailsButton filmId={filmId}/>
                 {isAuthorized && <BuyTicketButton filmId={filmId} year={year}/>}
+                {isAuthorized && <AddFavoriteFilmButton filmId={filmId}/>}
                 </span>
         </div>
     )

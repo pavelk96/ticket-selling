@@ -15,36 +15,35 @@ router.post(
         check('password', 'Минимальная длина пароля 6 символов').isLength({min: 6})
     ],
     async (req, res) => {
-    try{
+        try{
+            const errors = validationResult(req)
 
-        const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return res.status(400).json({
+                    errors: errors.array(),
+                    message: 'Некорректные данные при регистрации'
+                })
+            }
 
-        if (!errors.isEmpty()) {
-            return res.status(400).json({
-                errors: errors.array(),
-                message: 'Некорректные данные при регистрации'
-            })
+            const {email, password} = req.body
+            const candidate = await User.findOne( {email} )
+
+            if (candidate) {
+                return  res.status(400).json({message: 'Такой пользователь существует'})
+            }
+
+            const hashedPassword = await bcrypt.hash(password, 12);
+            const user = new User({email, password:hashedPassword});
+
+            await user.save()
+
+            res.status(201).json({message: "Пользователь создан"})
+
+        } catch (e) {
+            res.status(500).json({message: "Что-то пошло не так"})
+            console.log(e)
         }
-
-        const {email, password} = req.body
-        const candidate = await User.findOne( {email} )
-
-        if (candidate) {
-           return  res.status(400).json({message: 'Такой пользователь существует'})
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 12);
-        const user = new User({email, password:hashedPassword});
-
-        await user.save()
-
-        res.status(201).json({message: "Пользователь создан"})
-
-    } catch (e) {
-        res.status(500).json({message: "Что-то пошло не так"})
-        console.log(e)
-    }
-})
+    })
 
 // /api/auth/login
 router.post(
@@ -83,13 +82,39 @@ router.post(
                 { expiresIn: '1h' }
             );
 
-            res.json({ token, userId: user.id })
+            res.json({ token, userId: user.id, email })
 
         } catch (e) {
-            res.status(500).json({message: "Что-то пошло не так"})
+            res.status(500).json({message: "Что-то пошло не таккк"})
             console.log(e)
         }
     })
 
+// /api/auth/favorite-films
+router.post(
+    '/favorite-films',
+    async (req, res) => {
+        try {
+            const {userId} = req.body;
+            const user = await User.findOne({_id: userId});
+            const {favoriteFilms} = user;
+            res.json(favoriteFilms)
+        } catch (e) {
+            console.log("ошибка",e)
+        }
+    }
+)
+
+// /api/auth/add-favorite-film
+router.post(
+    '/add-favorite-film',
+    async (req, res) => {
+        try {
+            const {filmId} = req.body;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
 
 module.exports = router

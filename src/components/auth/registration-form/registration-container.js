@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {loginUser} from "../../../actions";
 import { withRouter } from "react-router";
 
+
 const authServices = new AuthServices();
 
 class RegistrationContainer extends Component {
@@ -16,7 +17,7 @@ class RegistrationContainer extends Component {
 
     handleRegistration = async () => {
         try {
-            const data = await authServices.request('/api/auth/register', 'POST', {...this.state.form})
+            const data = await authServices.request('/api/auth/register', 'POST', {...this.state.form}, {})
             console.log(data)
         } catch (e) {}
 
@@ -25,15 +26,16 @@ class RegistrationContainer extends Component {
 
     loginHandler = async () => {
         try {
-            const data = await authServices.request('/api/auth/login', 'POST', {...this.state.form})
+            const data = await authServices.request('/api/auth/login', 'POST', {...this.state.form}, {})
             if (data && data.token) {
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("userId", data.userId);
-                this.props.loginUser();
-                this.props.history.push("/")
+                localStorage.setItem("email", data.email);
+                await this.props.loginUser();
+                this.props.history.push("/");
             }
         } catch (e) {
-            console.log(e)
+
         }
     };
 

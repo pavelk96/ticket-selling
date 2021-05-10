@@ -1,3 +1,5 @@
+import AuthServices from "../services/auth";
+
 const initialState = {
     filmData:[],
     filmsSearch: [],
@@ -5,11 +7,14 @@ const initialState = {
     isLoading: false,
     isAuthorized: false,
     error: null,
-    filmIdSelectedMovie: [],
+    favoriteFilms: [],
 };
+
+
 
 const logOutUserThunk = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("email");
     localStorage.removeItem("userId");
 };
 
@@ -17,7 +22,11 @@ const loginUserThunk = (state) => {
     if (localStorage.getItem("token")){
         return {...state, isAuthorized:true }
     }
-}
+};
+
+
+
+
 
 const reducer = (state = initialState, action) => {
 
@@ -91,12 +100,25 @@ const reducer = (state = initialState, action) => {
             return {...state,
                 filmIdSelectedMovie: action.payload}
 
+        case `GET_FAVORITE_FILMS_REQUEST`:
+            return {...state,
+                favoriteFilms:[],
+                isLoading: true}
+
+        case `GET_FAVORITE_FILMS_SUCCESS`:
+            console.log("из reducers",action)
+            return {...state,
+                favoriteFilms: action.payload,
+                isLoading: false}
+
+        case `GET_FAVORITE_FILMS_ERROR`:
+            return {...state,
+                favoriteFilms: action.payload,
+                isLoading: false}
 
         default:
             return state;
     }
-
-
 };
 
 export default reducer;
