@@ -30,7 +30,6 @@ class RegistrationContainer extends Component {
             const data = await authServices.request('/api/auth/login', 'POST', {...this.state.form}, {})
             if (data && data.token) {
                 localStorage.setItem("token", data.token);
-                localStorage.setItem("userId", data.userId);
                 localStorage.setItem("email", data.email);
                 await this.props.loginUser();
                 this.props.history.push("/");

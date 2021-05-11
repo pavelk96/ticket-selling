@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const router = Router()
 const UserInfo = require('../models/User-Info')
 
-// /api/auth/favorite-films
+// /api/user-info/favorite-films
 router.post(
     '/favorite-films',
     async (req, res) => {
@@ -20,7 +20,7 @@ router.post(
     }
 )
 
-// /api/auth/add-favorite-film
+// /api/user-info/add-favorite-film
 router.post(
     '/add-favorite-film',
     async (req, res) => {

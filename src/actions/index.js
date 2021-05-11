@@ -99,8 +99,8 @@ const checkLoginUser = () => {
         type: "CHECK_LOGIN_USER"
     }
 };
-// Получаем id избранных фильмов
 
+// Получаем id избранных фильмов
 const getFavoriteFilmsRequest = () => {
     return {
         type: 'GET_FAVORITE_FILMS_ID_REQUEST'
@@ -122,9 +122,8 @@ const getFavoriteFilmsError = () => {
 
 const fetchFavoriteFilmsId = (dispatch) => () => {
     dispatch(getFavoriteFilmsRequest());
-        const userId =  localStorage.getItem("userId");
         const token =  localStorage.getItem("token");
-        userInfo.request('/api/user-info/favorite-films', 'POST', {userId, token})
+        userInfo.request('/api/user-info/favorite-films', 'POST', {         token})
         .then((favoriteFilms) => dispatch(getFavoriteFilmsSuccess(favoriteFilms)))
         .catch((err) => dispatch(getFavoriteFilmsError(err)));
 };
@@ -154,7 +153,6 @@ const fetchFavoriteFilm = (dispatch) => async () => {
     const favoriteFilmsId = await userInfo.request('/api/user-info/favorite-films', 'POST', {token})
         .then(favoriteFilms => favoriteFilms)
         .catch(err => dispatch(getFavoriteFilmsError(err)))
-
 
     if (favoriteFilmsId && favoriteFilmsId.length === 0) {
         dispatch(getFavoriteFilmSuccess([]));

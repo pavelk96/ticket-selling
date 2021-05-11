@@ -20,7 +20,7 @@ class AddFavoriteFilmButton extends Component{
 
         return(
             <div>
-                <button onClick={() => this.handleAddFavoriteFilm(this.props.filmId)}>Add this film</button>
+                <button className="btn btn-info" onClick={() => this.handleAddFavoriteFilm(this.props.filmId)}>Add this film</button>
             </div>
         )
     }
