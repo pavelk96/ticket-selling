@@ -5,10 +5,6 @@ import "./buy-ticket-button.css";
 
 class BuyTicketButton extends Component {
 
-    componentDidMount() {
-
-    };
-
     renderButton = () => {
         const oldDate = new Date();
         oldDate.setDate(oldDate.getDate()-28);

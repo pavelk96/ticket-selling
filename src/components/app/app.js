@@ -9,17 +9,11 @@ import Menu from "../header/menu";
 import MovieDetailsSearch from "../movie-item-block/movie-details-search/movie-details-search";
 import MovieDetailsByIdContainer from "../../containers/movie-container/movie-details-by-id-container";
 import CinemaHallContainer from "../../containers/movie-container/cinema-hall-container";
+import FavoriteFilms from "../../pages/favorite-films";
 import RegistrationPage from "../../pages/registration-page";
 import {checkLoginUser} from "../../actions";
 
 import './app.css';
-
-
-
-
-
-
-
 
 class App extends Component {
 
@@ -53,6 +47,7 @@ class App extends Component {
                                     path="/buy-ticket/:id"
                                     render={({match: {params}}) => <CinemaHallContainer id={params?.id}/>}
                                 />
+                                <Route path="/favorite-films" component={FavoriteFilms} exact />
                             </div>
                         }
                     </ErrorBoundry>
@@ -74,7 +69,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-
-
-

@@ -1,3 +1,4 @@
+
 const initialState = {
     filmData:[],
     filmsSearch: [],
@@ -5,11 +6,15 @@ const initialState = {
     isLoading: false,
     isAuthorized: false,
     error: null,
-    filmIdSelectedMovie: [],
+    favoriteFilmsId: [], //ид фильмов
+    favoriteFilmsData: [] //информация об избранных фильмах
 };
+
+
 
 const logOutUserThunk = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("email");
     localStorage.removeItem("userId");
 };
 
@@ -17,7 +22,10 @@ const loginUserThunk = (state) => {
     if (localStorage.getItem("token")){
         return {...state, isAuthorized:true }
     }
-}
+};
+
+
+
 
 const reducer = (state = initialState, action) => {
 
@@ -91,12 +99,41 @@ const reducer = (state = initialState, action) => {
             return {...state,
                 filmIdSelectedMovie: action.payload}
 
+        case `GET_FAVORITE_FILMS_ID_REQUEST`:
+            return {...state,
+                favoriteFilmsId:[],
+                isLoading: true}
+
+        case `GET_FAVORITE_FILMS_ID_SUCCESS`:
+            console.log(action.payload)
+            return {...state,
+                favoriteFilmsId: action.payload,
+                isLoading: false}
+
+        case `GET_FAVORITE_FILMS_ID_ERROR`:
+            return {...state,
+                favoriteFilmsId: action.payload,
+                isLoading: false}
+//
+        case `GET_FAVORITE_FILM_REQUEST`:
+            return {...state,
+                favoriteFilmsData: [],
+                isLoading: true}
+
+        case `GET_FAVORITE_FILM_SUCCESS`:
+            console.log(action.payload)
+            return {...state,
+                favoriteFilmsData: action.payload,
+                isLoading: false}
+
+        case `GET_FAVORITE_FILM_ERROR`:
+            return {...state,
+                error: action.payload,
+                isLoading: false}
 
         default:
             return state;
     }
-
-
 };
 
 export default reducer;

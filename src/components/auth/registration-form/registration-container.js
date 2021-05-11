@@ -1,9 +1,11 @@
 import React,{Component} from "react";
 import './registration-container.css';
-import AuthServices from "../../../services/auth";
+import AuthServices from "../../../services/user-info";
 import {connect} from "react-redux";
 import {loginUser} from "../../../actions";
 import { withRouter } from "react-router";
+
+
 
 const authServices = new AuthServices();
 
@@ -16,7 +18,7 @@ class RegistrationContainer extends Component {
 
     handleRegistration = async () => {
         try {
-            const data = await authServices.request('/api/auth/register', 'POST', {...this.state.form})
+            const data = await authServices.request('/api/auth/register', 'POST', {...this.state.form}, {})
             console.log(data)
         } catch (e) {}
 
@@ -25,15 +27,15 @@ class RegistrationContainer extends Component {
 
     loginHandler = async () => {
         try {
-            const data = await authServices.request('/api/auth/login', 'POST', {...this.state.form})
+            const data = await authServices.request('/api/auth/login', 'POST', {...this.state.form}, {})
             if (data && data.token) {
                 localStorage.setItem("token", data.token);
-                localStorage.setItem("userId", data.userId);
-                this.props.loginUser();
-                this.props.history.push("/")
+                localStorage.setItem("email", data.email);
+                await this.props.loginUser();
+                this.props.history.push("/");
             }
         } catch (e) {
-            console.log(e)
+
         }
     };
 
@@ -74,8 +76,8 @@ class RegistrationContainer extends Component {
                         </div>
                     </div>
                     </div>
-                <button className="btn" onClick={this.handleRegistration}>Зарегистрироваться</button>
-                <button className="btn" onClick={this.loginHandler}>Войти</button>
+                        <button className="btn" onClick={this.handleRegistration}>Зарегистрироваться</button>
+                        <button className="btn" onClick={this.loginHandler}>Войти</button>
             </div>
         )
     }
@@ -83,7 +85,8 @@ class RegistrationContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuthorized: state.isAuthorized
+        isAuthorized: state.isAuthorized,
+        isLoading: state.isLoading
     }
 };
 
