@@ -6,7 +6,6 @@ import ErrorBoundry from "../error/error-boundry/error-boundry";
 import RegistrationButton from "../header/registration-button";
 import Search from "../header/search";
 import Menu from "../header/menu";
-import MovieDetailsSearch from "../movie-item-block/movie-details-search/movie-details-search";
 import MovieDetailsByIdContainer from "../../containers/movie-container/movie-details-by-id-container";
 import CinemaHallContainer from "../../containers/movie-container/cinema-hall-container";
 import FavoriteFilms from "../../pages/favorite-films";
@@ -14,6 +13,7 @@ import RegistrationPage from "../../pages/registration-page";
 import {checkLoginUser} from "../../actions";
 
 import './app.css';
+import SearchFilmPage from "../../pages/search-film-page";
 
 class App extends Component {
 
@@ -37,7 +37,7 @@ class App extends Component {
                         {
                             isAuthorized && <div className="header">
                                 <Search/>
-                                <Route path="/" component={MovieDetailsSearch} exact/>
+                                <Route path="/" exact/>
                                 <Route path="/film/:id"
                                        render={({match}) => {
                                            const {id} = match.params
@@ -48,6 +48,7 @@ class App extends Component {
                                     render={({match: {params}}) => <CinemaHallContainer id={params?.id}/>}
                                 />
                                 <Route path="/favorite-films" component={FavoriteFilms} exact />
+                                <Route path="/search" component={SearchFilmPage} exact />
                             </div>
                         }
                     </ErrorBoundry>

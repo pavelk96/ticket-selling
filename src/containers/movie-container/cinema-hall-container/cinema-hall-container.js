@@ -3,6 +3,8 @@ import OnePlace from "../../../components/seat-selection/one-place"
 import "./cinema-hall-container.css";
 import {connect} from "react-redux";
 import UserInfo from "../../../services/user-info";
+import {fetchByuTicket} from "../../../actions"
+import Spinner from "../../../services/spinner";
 
 const userInfo = new UserInfo();
 
@@ -17,16 +19,8 @@ class CinemaHallContainer extends Component {
         }
     };
 
-    getByuTicket = async (filmId) => {
-        try {
-            const data = await userInfo.request('/api/byu-ticket/request-tickets', 'POST', {filmId}, {})
-        } catch (e) {
-
-        }
-    }
-
     componentDidMount() {
-        this.getByuTicket(this.props.id)
+        this.props.fetchByuTicket(this.props.id)
     }
 
     state = {
@@ -69,28 +63,38 @@ class CinemaHallContainer extends Component {
 
     render() {
 
-        const {id} = this.props;
+        const {id, buyTicketIsLoading} = this.props;
 
         return (
-            <div>
-                {id}
-                <div className="container">
-                    <img src="http://www.atrium-omsk.ru/images/tpl/screen.png" alt= "img"/>
-                    <div className="centered">
-                        {this.renderHallGrid()}
-                        <button className="btn btn-success" onClick={() => {this.handleByuTicket(id, this.state.selectedPlaceNumber)}} >Купить</button>
-                    </div>
-                </div>
-            </div>
+            <>
+                {buyTicketIsLoading ? <Spinner/> :
+                    <>
+                        {id}
+                        {this.props.filmData}
+                    <div className="container">
+                        <img src="http://www.atrium-omsk.ru/images/tpl/screen.png" alt= "img"/>
+                        <div className="centered">
+                            {this.renderHallGrid()}
+                            <button className="btn btn-success" onClick={() => {this.handleByuTicket(id, this.state.selectedPlaceNumber)}} >Купить</button>
+                        </div>
+                    </div></> }
+            </>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        filmData: state.filmData
+        filmData: state.filmData,
+        buyTicketIsLoading: state.buyTicketIsLoading
     }
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchByuTicket: fetchByuTicket(dispatch)
+    }
+}
 
-export default connect(mapStateToProps, null)(CinemaHallContainer);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CinemaHallContainer);

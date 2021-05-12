@@ -14,7 +14,7 @@ class RegistrationButton extends Component {
         showMenuProfile: false
     };
 
-    getFavoriteFilms  = async () => {
+    getFavoriteFilms  = () => {
 
         this.props.history.push("/favorite-films");
     };

@@ -146,7 +146,7 @@ const getFavoriteFilmError = () => {
         type: 'GET_FAVORITE_FILM_ERROR'
     };
 };
-
+// Получаем ид любимых фильмов пользователя и запрашиваем данные о них
 const fetchFavoriteFilm = (dispatch) => async () => {
     dispatch(getFavoriteFilmRequest());
     const token =  localStorage.getItem("token");
@@ -168,6 +168,32 @@ const fetchFavoriteFilm = (dispatch) => async () => {
     dispatch(getFavoriteFilmSuccess(filmDataArr));
 };
 
+//Получаем ВСЕ купленные билеты на фильм
+const getByuTicketRequest = () => {
+    return {
+        type: 'GET_BUY_TICKET_REQUEST'
+    };
+};
+
+const getByuTicketSuccess = (buyTicketData) => {
+    return {
+        type: 'GET_BUY_TICKET_SUCCESS',
+        payload: buyTicketData
+    };
+};
+
+const getByuTicketError = () => {
+    return {
+        type: 'GET_BUY_TICKET_ERROR'
+    };
+};
+
+const fetchByuTicket = (dispatch) => (filmId) => {
+    dispatch(getByuTicketRequest(filmId));
+    userInfo.request('/api/byu-ticket/request-tickets', 'POST', {filmId}, {})
+        .then((favoriteFilms) => dispatch(getByuTicketSuccess(favoriteFilms)))
+        .catch((err) => dispatch(getByuTicketError(err)));
+};
 
 
 export {
@@ -178,5 +204,6 @@ export {
     logoutUser,
     checkLoginUser,
     fetchFavoriteFilmsId,
-    fetchFavoriteFilm
+    fetchFavoriteFilm,
+    fetchByuTicket
 };
