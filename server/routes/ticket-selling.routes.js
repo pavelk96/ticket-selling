@@ -27,13 +27,13 @@ router.post(
                 candidateFilm.placesTaken = [...candidateFilm.placesTaken,...selectedPlaceNumber];
                 await candidateFilm.save();
                 await user.save();
-                res.json(user)
+                res.json(candidateFilm)
             } else {
                 const film = new Film({filmId, placesTaken: selectedPlaceNumber});
                 user.purchasedTickets = [...user.purchasedTickets, ...newTicket];
                 await film.save();
                 await user.save();
-                res.json(user)
+                res.json(film)
             }
         } catch (e) {
 

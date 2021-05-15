@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import "./seat-selection.css";
+import {connect} from "react-redux";
 
 
- class OnePlace extends Component {
+class OnePlace extends Component {
 
     state = {
         selectedPlace: false
     };
 
-
-
+    componentDidMount() {
+        
+    }
 
     render() {
 
@@ -23,10 +25,12 @@ import "./seat-selection.css";
         };
 
         if (this.state.selectedPlace) {
-            className += ' place-selected';
+            className += ' ';
         } else {
-            className = ' place';
+            className = ' place place-selected';
         }
+
+
 
         const onePlace = (
                 <div title="Описание" className={className}>
@@ -42,4 +46,10 @@ import "./seat-selection.css";
     }
 }
 
-export default OnePlace;
+const mapStateToProps = (state) => {
+    return {
+        buyTicketData: state.buyTicketData
+    }
+}
+
+export default connect(mapStateToProps, null)(OnePlace);

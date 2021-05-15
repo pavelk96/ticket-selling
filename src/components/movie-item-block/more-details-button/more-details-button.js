@@ -1,24 +1,21 @@
 import React, {Component} from 'react';
-
 import {withRouter} from 'react-router-dom';
 
 class MoreDetailsButton extends Component {
 
+    handleMoreDetailsButton =  (filmId) => {
+        const newPath =  `/film/${filmId}`
+        this.props.history.push(newPath)
+    };
+
     render () {
 
         const {filmId} = this.props;
-        const {history} = this.props;
-
-        const handleMoreDetailsButton =  (filmId) => {
-            const newPath =  `/film/${filmId}`
-            history.push(newPath)
-        };
 
         return (
-            <div>
-                <button className="btn btn-primary">Трейлер</button>
-                <button className="btn btn-primary"  onClick={() => handleMoreDetailsButton(filmId)}>Подробнее</button>
-            </div>
+            <>
+                <button className="btn btn-primary"  onClick={() => this.handleMoreDetailsButton(filmId)}>Подробнее</button>
+            </>
         )
     }
 }

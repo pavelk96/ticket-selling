@@ -1,7 +1,10 @@
-import React, {Component} from 'react';
-import './menu.css'
-import {Link} from "react-router-dom";
+import './menu.css';
 
+import React, {Component} from 'react';
+import {Link} from "react-router-dom";
+import { Button } from 'antd';
+import Search from "../search/search";
+import RegistrationButton from "../registration-button/registration-button";
 
 export default class Menu extends Component {
 
@@ -10,12 +13,22 @@ export default class Menu extends Component {
 
         return (
             <div className="menu">
-            <Link to="/"><button className="btn btn-primary" >Главная</button></Link>
-            <button  className="btn btn-primary ">Фильмы</button>
-            <button  className="btn btn-primary">Топ ожидаемых фильмов</button>
-            <button  className="btn btn-primary">Цифровые релизы</button>
-            <button  className="btn btn-primary">Акции</button>
-            </div>
+                <div>
+                    <Link to="/"><Button type="primary" className="btn">Главная</Button></Link>
+                    <Button type="primary" className="btn">Фильмы</Button>
+                    <Button type="primary" className="btn">Топ ожидаемых фильмов</Button>
+
+                </div>
+                <div className="registration">
+                    <RegistrationButton/>
+                </div>
+
+                <div className="search">
+                    <Search/>
+                </div>
+
+           </div>
+
         )
     };
 };

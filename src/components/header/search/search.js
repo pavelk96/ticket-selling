@@ -2,10 +2,13 @@ import {fetchFilmsSearchData} from "../../../actions";
 import {debounce} from "../../../services/utils";
 
 import React, {Component} from 'react';
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import {connect} from "react-redux";
 
 import "./search.css";
+
+import {Input} from 'antd';
+
 
 class Search extends Component {
 
@@ -18,11 +21,19 @@ class Search extends Component {
 
     render () {
         return (
-            <div className="search">
                 <form>
-                    <input className="form-control mr-sm-2" type="text" name="Search" placeholder="Search" onKeyPress={this.redirectSearch}  onChange={this.handleSearchData} />
-                </form>
-            </div>
+                <Input.Search
+                    type="text"
+                    name="Search"
+                    placeholder="Search"
+                    allowClear
+                    enterButton="Search"
+                    size="middle"
+                    onKeyPress={this.redirectSearch}
+                    onChange={this.handleSearchData}
+                    style={{width: 200}}
+                />
+            </form>
         )
     }
 }

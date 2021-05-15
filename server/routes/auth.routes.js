@@ -83,6 +83,7 @@ router.post(
                 { expiresIn: '1h' }
             );
 
+
             res.json({ token, email })
 
         } catch (e) {

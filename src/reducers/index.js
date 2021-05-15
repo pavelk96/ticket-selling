@@ -3,6 +3,7 @@ const initialState = {
     filmData:[],
     filmsSearch: [],
     filmsDigitalReleases: [],
+    filmsDigitalReleasesIsLoading: [],
     isLoading: false,
     isAuthorized: false,
     error: null,
@@ -81,18 +82,18 @@ const reducer = (state = initialState, action) => {
         case `GET_FILMS_DIGITAL_RELEASES_REQUEST`:
             return {...state,
                 filmsDigitalReleases:[],
-                isLoading: true}
+                filmsDigitalReleasesIsLoading: true}
 
         case `GET_FILMS_DIGITAL_RELEASES_SUCCESS`:
             console.log(action)
             return {...state,
                 filmsDigitalReleases: action.payload?.films,
-                isLoading: false}
+                filmsDigitalReleasesIsLoading: false}
 
         case `GET_FILMS_DIGITAL_RELEASES_ERROR`:
             return {...state,
                 error: action.payload,
-                isLoading: false}
+                filmsDigitalReleasesIsLoading: false}
 
         case 'PUSH_SELECTED_FILM_ID':
             console.log(action.payload)

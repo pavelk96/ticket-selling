@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
 import "./ authorization-form.css";
+
+import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import './ authorization-form.css';
+import {Button} from "antd";
 
 
 class  AuthorizationForm extends Component {
@@ -9,9 +10,9 @@ class  AuthorizationForm extends Component {
     render () {
 
         return (
-            <div>
-                <Link to="/registration" className="btn btn-primary reg">Login</Link>
-            </div>
+            <>
+                    DEL!!!
+            </>
         )
     }
 }

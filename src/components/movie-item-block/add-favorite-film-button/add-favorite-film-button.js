@@ -1,5 +1,6 @@
-import React,{Component} from 'react';
 import UserInfo from "../../../services/user-info";
+
+import React,{Component} from 'react';
 
 const userInfo = new UserInfo();
 
@@ -17,11 +18,11 @@ class AddFavoriteFilmButton extends Component{
 
 
     render(){
-
+        const {filmId} = this.props;
         return(
-            <div>
-                <button className="btn btn-info" onClick={() => this.handleAddFavoriteFilm(this.props.filmId)}>Add this film</button>
-            </div>
+            <>
+                <button className="btn btn-info" onClick={() => this.handleAddFavoriteFilm(filmId)}>Add this film</button>
+            </>
         )
     }
 }
