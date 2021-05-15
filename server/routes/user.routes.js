@@ -28,9 +28,12 @@ router.post(
             const {token, filmId} = req.body;
             const decoded = jwt.decode(token, {complete: true})
             const userInfo = await UserInfo.findOne({id: decoded.payload.userId});
-            userInfo.favoriteFilms = [...userInfo.favoriteFilms, filmId]
+            if (userInfo.favoriteFilms === undefined || userInfo.favoriteFilms === null) {
+                userInfo.favoriteFilms = [filmId];
+            }
+            userInfo.favoriteFilms = [...userInfo?.favoriteFilms, filmId]
             userInfo.save();
-            res.json(filmId)
+            res.status(201).json({message:"Фильм добавлен в избранное"})
         } catch (e) {
             console.log(e)
         }

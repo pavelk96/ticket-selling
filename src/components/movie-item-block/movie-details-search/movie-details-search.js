@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Spinner from "../../../services/spinner";
 import MovieDetailsSearchContainer from "../../../containers/movie-container/movie-details-search-container/movie-details-search-container";
 
+
 import  "./movie-details-search.css";
 
 

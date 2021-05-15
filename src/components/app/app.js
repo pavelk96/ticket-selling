@@ -15,16 +15,6 @@ import {checkLoginUser} from "../../actions";
 import './app.css';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
-const style = {
-    height: 40,
-    width: 40,
-    lineHeight: '40px',
-    borderRadius: 4,
-    backgroundColor: '#1088e9',
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 14,
-};
 
 const { Header, Footer, Content } = Layout;
 

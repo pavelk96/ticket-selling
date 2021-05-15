@@ -3,6 +3,7 @@ import { Carousel } from 'antd';
 import { connect} from "react-redux";
 import {fetchFilmsDigitalReleasesData} from "../../actions";
 import "./slider-home-page-container.css"
+import Spinner from "../../services/spinner";
 
 
 const contentStyle = {
@@ -16,44 +17,42 @@ const contentStyle = {
 };
 
 const imgStyle = {
-    position: "center"
+    display: "flex",
 }
 
 
 class SliderHomePageContainer extends Component{
 
   async componentDidMount()  {
-        this.props.fetchFilmsDigitalReleasesData(2021, 3)
+        this.props.fetchFilmsDigitalReleasesData(2020, 3)
     };
 
     render(){
 
-        const {filmsDigitalReleases} = this.props;
+        const {filmsDigitalReleases, filmsDigitalReleasesIsLoading} = this.props;
 
-        const oneFilmData =  (idx) => {
-            return (
-                <>
-                    <p>{filmsDigitalReleases.[idx]?.nameRu}</p>
-                    <p>{filmsDigitalReleases.[idx]?.description}</p>
-                    <img width={360} height={563} src={filmsDigitalReleases.[idx]?.posterUrlPreview} className={imgStyle} alt="film img"/>
-                    <p>Продолжительность: {filmsDigitalReleases.[idx]?.filmLength}</p>
-                </>
-            )
+        const renderFilmData =  () => {
+            const arr = [];
+            for (let i =0; i<=5; i++) {
+                arr.push(
+                    <>
+                        <div style={contentStyle}>
+                            <p>{filmsDigitalReleases[i]?.nameRu}</p>
+                            <p>{filmsDigitalReleases[i]?.description}</p>
+                            <img width={360} height={563} src={filmsDigitalReleases[i]?.posterUrlPreview} className={imgStyle} alt="film img"/>
+                            <p>Продолжительность: {filmsDigitalReleases[i]?.filmLength}</p>
+                        </div>
+                    </>
+                )
+            }
+            return arr;
         }
 
+
         return(
-                <Carousel autoplay autoplaySpeed={2000} adaptiveHeight={true}>
-                    <>
-                        <div style={contentStyle}>
-                            {oneFilmData(1)}
-                        </div>
-                    </>
-                    <>
-                        <div style={contentStyle}>
-                            {oneFilmData(1)}
-                        </div>
-                    </>
-                </Carousel>
+                    <Carousel autoplay autoplaySpeed={2000} adaptiveHeight={true}>
+                        {filmsDigitalReleasesIsLoading ? <Spinner/> : renderFilmData()}
+                    </Carousel>
         )
     }
 };

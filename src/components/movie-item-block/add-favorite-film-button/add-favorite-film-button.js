@@ -1,6 +1,6 @@
 import UserInfo from "../../../services/user-info";
-
 import React,{Component} from 'react';
+import { message } from 'antd';
 
 const userInfo = new UserInfo();
 
@@ -10,7 +10,7 @@ class AddFavoriteFilmButton extends Component{
         try {
             const token = localStorage.getItem("token")
             const data = await userInfo.request('/api/user-info/add-favorite-film', 'POST', {filmId, token}, {})
-            console.log(data)
+            message.success(data.message)
         } catch (e) {
 
         }

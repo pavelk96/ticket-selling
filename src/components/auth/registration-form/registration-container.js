@@ -6,7 +6,8 @@ import './registration-container.css';
 import { withRouter } from "react-router-dom";
 import React,{Component} from "react";
 import {connect} from "react-redux";
-import { message } from 'antd';
+import { message, Button } from 'antd';
+
 
 import { Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -25,7 +26,9 @@ class RegistrationContainer extends Component {
         try {
             const data = await authServices.request('/api/auth/register', 'POST', {...this.state.form}, {})
             message.success(data.message)
-
+            localStorage.setItem("token", data.token);
+            await loginUser()
+            this.props.history.push("/");
         } catch (e) {
             message.error(e.message)
         }
@@ -83,8 +86,8 @@ class RegistrationContainer extends Component {
                                onChange={this.changeHandler}/>
                     </div>
                     </div>
-                        <button className="btn" onClick={this.handleRegistration}>Зарегистрироваться</button>
-                        <button className="btn" onClick={this.loginHandler}>Войти</button>
+                        <Button onClick={this.handleRegistration}>Зарегистрироваться</Button>
+                        <Button onClick={this.loginHandler}>Войти</Button>
             </div>
         )
     }
