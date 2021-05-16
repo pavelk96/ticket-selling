@@ -1,0 +1,12 @@
+.menu{
+    display: flex;
+}
+.search {
+        position: absolute;
+        margin-left: 77%;
+        margin-top: 16px;
+}
+.registration {
+        position: absolute;
+        margin-left: 88%;
+}

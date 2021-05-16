@@ -7,7 +7,7 @@
     cursor: pointer;
     width: 24px;
     height: 24px;
-    background-image: url(/src/images/place1.png);
+    background-image: url(/src/images/place2.png);
     text-align: center;
     color: #5d2697;
 }
@@ -18,7 +18,7 @@
 }
 
 .place-selected {
-    background-image: url(/src/images/place2.png);
+    background-image: url(/src/images/place1.png);
     text-align: center;
     cursor: pointer;
     width: 24px;

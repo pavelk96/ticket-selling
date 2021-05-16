@@ -1,60 +1,60 @@
+import {fetchFavoriteFilm, fetchFavoriteFilmsId, logoutUser} from "../../../actions";
+
+import './registration-button.css';
+
+import {withRouter} from "react-router-dom";
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {fetchFavoriteFilm, fetchFavoriteFilmsId, logoutUser} from "../../../actions";
-import './registration-button.css';
-import AuthorizationForm from "../../auth/ authorization-form";
-import { withRouter } from "react-router";
-
-
+import {Button, Dropdown, Menu as MenuAnt} from "antd";
 
 
 class RegistrationButton extends Component {
 
-    state = {
-        showMenuProfile: false
-    };
 
-    getFavoriteFilms  = async () => {
-
+    getFavoriteFilms  = () => {
         this.props.history.push("/favorite-films");
     };
 
-    render () {
-        const {isAuthorized} = this.props;
-
-        const handleLogoutButton = () => {
-            this.setState({showMenuProfile: false});
-            this.props.logoutUser();
-        };
-
-
-        const buttonLogout = (
-            <div>
-                <button className="btn btn-primary dropdown-toggle user-name"  onClick={() => {showMenuProfileClick()}}>{localStorage.getItem("email")}</button>
-            </div>
-        );
-
-        const showMenuProfileClick = () =>{
-            this.setState({showMenuProfile: !this.state.showMenuProfile})
+    pushToRegistration = () => {
+        if (this.props.isAuthorized) {
+            return
         }
+        this.props.history.push("/registration");
+    }
 
-        const content = isAuthorized ? buttonLogout : <AuthorizationForm/>;
+    menuProfileRedirect = () => {
+        this.props.history.push("/profile");
+    }
 
-        const menuProfile = (
-            <div className="profile-menu">
-                <button className="btn btn-primary">Мой профиль</button>
-                <button className="btn btn-primary" onClick={this.getFavoriteFilms}>Мои фильмы</button>
-                <button className="btn btn-primary" onClick={() => {handleLogoutButton()}}>Logout</button>
-            </div>
+    handleLogoutButton = async () => {
+       await this.props.logoutUser();
+       localStorage.removeItem("email");
+    };
+
+    render () {
+
+        const menu = (
+            (this.props?.isAuthorized ?
+                    <MenuAnt>
+                        <MenuAnt.Item>
+                            <Button onClick={() => this.menuProfileRedirect()}>Мой профиль</Button>
+                        </MenuAnt.Item>
+                        <MenuAnt.Item>
+                            <Button onClick={() => this.getFavoriteFilms()}>Мои фильмы</Button>
+                        </MenuAnt.Item>
+                        <MenuAnt.Item>
+                            <Button onClick={() => this.handleLogoutButton()}>Logout</Button>
+                        </MenuAnt.Item>
+                    </MenuAnt> : <></>
+            )
         );
-
-        const contentMenuProfile = this.state.showMenuProfile ? menuProfile : null;
 
 
         return (
             <div>
-                {content}
-                {contentMenuProfile}
+                <Dropdown overlay={menu} placement="topRight">
+                    <Button type="primary" className="btn" onClick={this.pushToRegistration}>{(localStorage.getItem("email") ? localStorage.getItem("email") : "Login") }</Button>
+                </Dropdown>
             </div>
         )
     }
@@ -62,9 +62,9 @@ class RegistrationButton extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuthorized: state.isAuthorized,
-        favoriteFilmsData: state.favoriteFilmsData,
-        favoriteFilmsId: state.favoriteFilmsId
+        isAuthorized: state?.isAuthorized,
+        favoriteFilmsData: state?.favoriteFilmsData,
+        favoriteFilmsId: state?.favoriteFilmsId
     }
 };
 

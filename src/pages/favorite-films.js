@@ -7,7 +7,7 @@ class FavoriteFilms extends Component{
     render(){
 
         return(
-            <div>
+            <div style={{marginLeft: 700}}>
                 <FavoriteFilmsContainer/>
             </div>
         )

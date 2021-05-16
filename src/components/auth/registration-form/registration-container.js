@@ -1,10 +1,16 @@
-import React,{Component} from "react";
-import './registration-container.css';
 import AuthServices from "../../../services/user-info";
-import {connect} from "react-redux";
 import {loginUser} from "../../../actions";
-import { withRouter } from "react-router";
 
+import './registration-container.css';
+
+import { withRouter } from "react-router-dom";
+import React,{Component} from "react";
+import {connect} from "react-redux";
+import { message, Button } from 'antd';
+
+
+import { Input } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
 
 const authServices = new AuthServices();
@@ -19,8 +25,13 @@ class RegistrationContainer extends Component {
     handleRegistration = async () => {
         try {
             const data = await authServices.request('/api/auth/register', 'POST', {...this.state.form}, {})
-            console.log(data)
-        } catch (e) {}
+            message.success(data.message)
+            localStorage.setItem("token", data.token);
+            await loginUser()
+            this.props.history.push("/");
+        } catch (e) {
+            message.error(e.message)
+        }
 
     };
 
@@ -35,7 +46,7 @@ class RegistrationContainer extends Component {
                 this.props.history.push("/");
             }
         } catch (e) {
-
+            message.error(e.message)
         }
     };
 
@@ -50,10 +61,11 @@ class RegistrationContainer extends Component {
 
         return (
             <div className="profile-menu">
-                <div className="form-group">
+                <div>
                 <label htmlFor="inputEmail" className="col-lg-2 control-label">Email</label>
                 <div className="col-lg-10">
-                    <input
+                    <Input
+                            prefix={<UserOutlined />}
                            className="form-control"
                            placeholder="Введите email"
                            id="email"
@@ -62,22 +74,20 @@ class RegistrationContainer extends Component {
                            onChange={this.changeHandler}/>
                 </div>
             </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="inputPassword" className="col-lg-2 control-label">Password</label>
                     <div className="col-lg-10">
-                        <input
+                        <Input.Password
                                className="form-control"
-                               placeholder="Введите email"
+                               placeholder="Введите пароль"
                                id="password"
                                type="text"
                                name="password"
                                onChange={this.changeHandler}/>
-                        <div className="checkbox">
-                        </div>
                     </div>
                     </div>
-                        <button className="btn" onClick={this.handleRegistration}>Зарегистрироваться</button>
-                        <button className="btn" onClick={this.loginHandler}>Войти</button>
+                        <Button onClick={this.handleRegistration}>Зарегистрироваться</Button>
+                        <Button onClick={this.loginHandler}>Войти</Button>
             </div>
         )
     }
@@ -85,8 +95,8 @@ class RegistrationContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuthorized: state.isAuthorized,
-        isLoading: state.isLoading
+        isAuthorized: state?.isAuthorized,
+        isLoading: state?.isLoading
     }
 };
 

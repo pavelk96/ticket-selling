@@ -1,14 +1,14 @@
 import React,{Component} from 'react';
-import Menu from "../components/header/menu";
+import SliderHomePageContainer from "../containers/slider-home-page-container";
+
+
 
 class HomePage extends Component{
 
     render(){
 
         return(
-            <div>
-                <Menu/>
-            </div>
+            <SliderHomePageContainer/>
         )
     }
 }

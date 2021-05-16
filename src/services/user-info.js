@@ -3,7 +3,10 @@ export default class UserInfo {
         try {
             if (body) {
                 body = JSON.stringify(body)
-                headers['Content-Type'] = 'application/json';
+                headers = {
+                    'Content-Type': 'application/json',
+                    'Access-Control' : 'https://ticket-selli.uc.r.appspot.com'
+                }
             }
 
             const response = await fetch(url,{method, body, headers})

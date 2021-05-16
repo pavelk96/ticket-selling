@@ -1,9 +1,9 @@
+import Spinner from "../../services/spinner";
+import MovieDetailsSearchContainer from "../movie-container/movie-details-search-container/movie-details-search-container";
+import {fetchFavoriteFilm, fetchFavoriteFilmsId} from "../../actions/index";
+
 import React,{Component} from 'react';
 import {connect} from "react-redux";
-import {fetchFavoriteFilm, fetchFavoriteFilmsId} from "../../actions/index";
-import Spinner from "../../services/spinner";
-import MovieDetailsSearchContainer
-    from "../movie-container/movie-details-search-container/movie-details-search-container";
 
 class FavoriteFilmsContainer extends Component{
 
@@ -16,7 +16,8 @@ class FavoriteFilmsContainer extends Component{
     render(){
         const {isLoading, favoriteFilmsData} = this.props;
         return(
-            <div>
+            <div className="favorite-film">
+
                 { isLoading ? <Spinner /> : (favoriteFilmsData || []).map(film => <MovieDetailsSearchContainer key={film.filmId} film={film} />) }
             </div>
         )

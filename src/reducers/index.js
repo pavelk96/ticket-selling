@@ -3,19 +3,20 @@ const initialState = {
     filmData:[],
     filmsSearch: [],
     filmsDigitalReleases: [],
+    filmsDigitalReleasesIsLoading: [],
     isLoading: false,
     isAuthorized: false,
     error: null,
     favoriteFilmsId: [], //ид фильмов
-    favoriteFilmsData: [] //информация об избранных фильмах
+    favoriteFilmsData: [], //информация об избранных фильмах
+    buyTicketData: [], // Массив всех купленных билетов на фильм
+    buyTicketIsLoading: false
 };
 
 
 
 const logOutUserThunk = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    localStorage.removeItem("userId");
 };
 
 const loginUserThunk = (state) => {
@@ -36,13 +37,13 @@ const reducer = (state = initialState, action) => {
 
         case `LOGIN_USER`:
             return {...state,
-                isAuthorized:true,
+                isAuthorized:true
             }
 
         case `LOGOUT_USER`:
             logOutUserThunk()
             return {...state,
-                isAuthorized:false,
+                isAuthorized:false
             }
 
         case `GET_FILM_REQUEST`:
@@ -81,24 +82,25 @@ const reducer = (state = initialState, action) => {
         case `GET_FILMS_DIGITAL_RELEASES_REQUEST`:
             return {...state,
                 filmsDigitalReleases:[],
-                isLoading: true}
+                filmsDigitalReleasesIsLoading: true}
 
         case `GET_FILMS_DIGITAL_RELEASES_SUCCESS`:
             console.log(action)
             return {...state,
                 filmsDigitalReleases: action.payload?.films,
-                isLoading: false}
+                filmsDigitalReleasesIsLoading: false}
 
         case `GET_FILMS_DIGITAL_RELEASES_ERROR`:
             return {...state,
                 error: action.payload,
-                isLoading: false}
+                filmsDigitalReleasesIsLoading: false}
 
         case 'PUSH_SELECTED_FILM_ID':
             console.log(action.payload)
             return {...state,
                 filmIdSelectedMovie: action.payload}
 
+        // Получаем ид любимых фильмах
         case `GET_FAVORITE_FILMS_ID_REQUEST`:
             return {...state,
                 favoriteFilmsId:[],
@@ -114,7 +116,7 @@ const reducer = (state = initialState, action) => {
             return {...state,
                 favoriteFilmsId: action.payload,
                 isLoading: false}
-//
+// Получаем информацию о любимых фильмах
         case `GET_FAVORITE_FILM_REQUEST`:
             return {...state,
                 favoriteFilmsData: [],
@@ -130,6 +132,23 @@ const reducer = (state = initialState, action) => {
             return {...state,
                 error: action.payload,
                 isLoading: false}
+
+        // Получаем информацию о любимых фильмах
+        case `GET_BUY_TICKET_REQUEST`:
+            return {...state,
+                buyTicketData: [],
+                buyTicketIsLoading: true}
+
+        case `GET_BUY_TICKET_SUCCESS`:
+            console.log(action.payload)
+            return {...state,
+                buyTicketData: action.payload?.candidateFilm?.placesTaken,
+                buyTicketIsLoading: false}
+
+        case `GET_BUY_TICKET_ERROR`:
+            return {...state,
+                error: action.payload,
+                buyTicketIsLoading: false}
 
         default:
             return state;
