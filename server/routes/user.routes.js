@@ -31,7 +31,7 @@ router.post(
             if (userInfo.favoriteFilms === undefined || userInfo.favoriteFilms === null) {
                 userInfo.favoriteFilms = [filmId];
             }
-            userInfo.favoriteFilms = [...userInfo?.favoriteFilms, filmId]
+            userInfo.favoriteFilms = [(userInfo && userInfo.favoriteFilms), filmId]
             userInfo.save();
             res.status(201).json({message:"Фильм добавлен в избранное"})
         } catch (e) {
