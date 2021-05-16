@@ -9,7 +9,7 @@ export default class UserInfo {
                 }
             }
 
-            const response = await fetch(url,{method, body, headers})
+            const response = await fetch(`http://82.148.30.66:5000${url}`,{method, body, headers})
             const data = await response.json();
 
             if (!response.ok) {

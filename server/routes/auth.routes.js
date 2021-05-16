@@ -55,7 +55,7 @@ router.post(
     ],
     async (req, res) => {
         try{
-
+            res.set('Access-Control-Allow-Origin', '*')
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
                 return res.status(400).json({
