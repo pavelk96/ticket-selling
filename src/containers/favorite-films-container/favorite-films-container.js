@@ -18,7 +18,7 @@ class FavoriteFilmsContainer extends Component{
         return(
             <div className="favorite-film">
 
-                { isLoading ? <Spinner /> : (favoriteFilmsData || []).map(film => <MovieDetailsSearchContainer key={film.filmId} film={film} />) }
+                { isLoading ? <Spinner /> : (favoriteFilmsData || []).map(film => <MovieDetailsSearchContainer key={film?.filmId} film={film} />) }
             </div>
         )
     }
