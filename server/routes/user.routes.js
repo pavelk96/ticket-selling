@@ -12,8 +12,8 @@ router.post(
             const {token} = req.body;
             const decoded = jwt.decode(token, {complete: true})
             const user = await UserInfo.findOne({id: decoded.payload.userId});
-            const {favoriteFilms} = user;
-            res.json(favoriteFilms)
+                const {favoriteFilms} = user;
+                res.json(favoriteFilms)
         } catch (e) {
             console.log("ошибка",e)
         }
