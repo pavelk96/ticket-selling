@@ -58,9 +58,6 @@ class App extends Component {
                             </>
                         }
                     </Content>
-                    <Footer>
-                        Footer
-                    </Footer>
                 </Layout>
                     </ErrorBoundry>
                 </Router>

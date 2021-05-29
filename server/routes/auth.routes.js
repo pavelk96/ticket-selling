@@ -87,7 +87,6 @@ router.post(
 
         } catch (e) {
             res.status(500).json({message: "Что-то пошло не таккк"})
-            console.log(e)
         }
     })
 

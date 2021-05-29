@@ -37,9 +37,6 @@ class RegistrationButton extends Component {
             (this.props?.isAuthorized ?
                     <MenuAnt>
                         <MenuAnt.Item>
-                            <Button onClick={() => this.menuProfileRedirect()}>Мой профиль</Button>
-                        </MenuAnt.Item>
-                        <MenuAnt.Item>
                             <Button onClick={() => this.getFavoriteFilms()}>Мои фильмы</Button>
                         </MenuAnt.Item>
                         <MenuAnt.Item>

@@ -12,8 +12,7 @@ const contentStyle = {
     lineHeight: '25px',
     background: '#364d79',
     display: "flex",
-    flexDirection: "column",
-    fleWrap: "wrap"
+    justifyContent: "center",
 };
 
 const imgStyle = {
@@ -35,14 +34,16 @@ class SliderHomePageContainer extends Component{
             const arr = [];
             for (let i =0; i<=5; i++) {
                 arr.push(
-                    <>
+                    <div key={i}>
                         <div style={contentStyle}>
-                            <p>{filmsDigitalReleases[i]?.nameRu}</p>
-                            <p>{filmsDigitalReleases[i]?.description}</p>
                             <img width={360} height={563} src={filmsDigitalReleases[i]?.posterUrlPreview} className={imgStyle} alt="film img"/>
-                            <p>Продолжительность: {filmsDigitalReleases[i]?.filmLength}</p>
+                            <div style={{marginLeft: "50px", marginTop: "150px"}}>
+                                <p>{filmsDigitalReleases[i]?.nameRu}</p>
+                                <p>{filmsDigitalReleases[i]?.description}</p>
+                                <p>Продолжительность: {filmsDigitalReleases[i]?.filmLength}</p>
+                            </div>
                         </div>
-                    </>
+                    </div>
                 )
             }
             return arr;
@@ -50,7 +51,7 @@ class SliderHomePageContainer extends Component{
 
 
         return(
-                    <Carousel autoplay autoplaySpeed={2000} adaptiveHeight={true}>
+                    <Carousel autoplay autoplaySpeed={2000} adaptiveHeight={true} >
                         {filmsDigitalReleasesIsLoading ? <Spinner/> : renderFilmData()}
                     </Carousel>
         )
