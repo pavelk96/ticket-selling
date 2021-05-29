@@ -2,7 +2,7 @@ const {Schema, model} = require('mongoose');
 
 const schema = new Schema({
     id: {type: String, unique: true, ref: "id"},
-    favoriteFilms: { type: Array, ref: 'favoriteFilms' },
+    favoriteFilms: { type: [], ref: 'favoriteFilms' },
     purchasedTickets: [
         {
             filmId: {type: String, unique: true, ref: "id"},

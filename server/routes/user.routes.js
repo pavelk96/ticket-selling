@@ -12,8 +12,12 @@ router.post(
             const {token} = req.body;
             const decoded = jwt.decode(token, {complete: true})
             const user = await UserInfo.findOne({id: decoded.payload.userId});
-                const {favoriteFilms} = user;
-                res.json(favoriteFilms)
+            if (user.favoriteFilms !== []) {
+                res.json(user.favoriteFilms)
+            } else {
+                res.status(404).json({message: "Нет избранных фильмов"})
+            }
+
         } catch (e) {
             console.log("ошибка",e)
         }
@@ -28,6 +32,7 @@ router.post(
             const {token, filmId} = req.body;
             const decoded = jwt.decode(token, {complete: true})
             const userInfo = await UserInfo.findOne({id: decoded.payload.userId});
+            if (userInfo.favoriteFilms != null)
             userInfo.favoriteFilms = [...userInfo.favoriteFilms, filmId]
             userInfo.save();
             res.json(filmId)

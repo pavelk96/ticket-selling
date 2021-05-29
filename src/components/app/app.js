@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import {connect} from "react-redux";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
 import { Layout } from 'antd';
 
 import ErrorBoundry from "../error/error-boundry/error-boundry";
@@ -46,11 +46,13 @@ class App extends Component {
                             render={({match: {params}}) => <CinemaHallContainer id={params?.id}/>}/>
                         {
                             isAuthorized && <div>
+                                <Route exact path="/registration" render={() => (<Redirect to="/" />)} />
                                 <Route path="/" component={HomePage} exact/>
                                 <Route path="/favorite-films" component={FavoriteFilms} exact />
                                 <Route path="/search" component={SearchFilmPage} exact />
                             </div>
                         }
+
                     </Content>
                     <Footer>
                         Footer

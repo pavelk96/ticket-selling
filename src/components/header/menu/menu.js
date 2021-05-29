@@ -5,8 +5,10 @@ import {Link} from "react-router-dom";
 import { Button } from 'antd';
 import Search from "../search/search";
 import RegistrationButton from "../registration-button/registration-button";
+import {connect} from "react-redux";
 
-export default class Menu extends Component {
+
+class Menu extends Component {
 
 
     render () {
@@ -24,7 +26,7 @@ export default class Menu extends Component {
                 </div>
 
                 <div className="search">
-                    <Search/>
+                    { this.props.isAuthorized ? <Search/> : null}
                 </div>
 
            </div>
@@ -32,3 +34,11 @@ export default class Menu extends Component {
         )
     };
 };
+
+const mapStateToProps = (state) => {
+    return {
+        isAuthorized: state.isAuthorized
+    }
+}
+
+export default connect(mapStateToProps, null)(Menu);
