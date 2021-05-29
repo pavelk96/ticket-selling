@@ -13,7 +13,8 @@ import HomePage from "../../pages/home-page";
 import {checkLoginUser} from "../../actions";
 
 import './app.css';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import 'antd/dist/antd.css';
+import RegistrationPage from "../../pages/registration-page"; // or 'antd/dist/antd.less'
 
 
 const { Header, Footer, Content } = Layout;
@@ -44,15 +45,18 @@ class App extends Component {
                         <Route
                             path="/buy-ticket/:id"
                             render={({match: {params}}) => <CinemaHallContainer id={params?.id}/>}/>
-                        {
-                            isAuthorized && <div>
-                                <Route exact path="/registration" render={() => (<Redirect to="/" />)} />
-                                <Route path="/" component={HomePage} exact/>
-                                <Route path="/favorite-films" component={FavoriteFilms} exact />
-                                <Route path="/search" component={SearchFilmPage} exact />
-                            </div>
-                        }
 
+                        <Route path="/" component={HomePage} exact/>
+                        <Route path="/search" component={SearchFilmPage} exact />
+                        {
+                            isAuthorized ? <>
+                                <Route exact path="/registration" render={() => isAuthorized && (<Redirect to="/" />)} />
+                                <Route path="/favorite-films" component={FavoriteFilms} exact />
+                            </> : <>
+                                <Route path="/registration" component={RegistrationPage} exact/>
+                                <Route exact path="/favorite-films" render={() => (<Redirect to="/registration" />)} />
+                            </>
+                        }
                     </Content>
                     <Footer>
                         Footer

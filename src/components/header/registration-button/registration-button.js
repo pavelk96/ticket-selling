@@ -53,7 +53,7 @@ class RegistrationButton extends Component {
         return (
             <div>
                 <Dropdown overlay={menu} placement="topRight">
-                    <Button type="primary" className="btn" onClick={this.pushToRegistration}>{(localStorage.getItem("email") ? localStorage.getItem("email") : "Login") }</Button>
+                    <Button type="primary" className="btn" onClick={this.pushToRegistration}>{this.props.userEmail || "Login" }</Button>
                 </Dropdown>
             </div>
         )
@@ -64,7 +64,8 @@ const mapStateToProps = (state) => {
     return {
         isAuthorized: state?.isAuthorized,
         favoriteFilmsData: state?.favoriteFilmsData,
-        favoriteFilmsId: state?.favoriteFilmsId
+        favoriteFilmsId: state?.favoriteFilmsId,
+        userEmail: state?.user.email
     }
 };
 
