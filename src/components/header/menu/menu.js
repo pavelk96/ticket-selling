@@ -29,6 +29,8 @@ class Menu extends Component {
                     { this.props.isAuthorized ? <Search/> : null}
                 </div>
 
+
+
            </div>
 
         )
