@@ -11,7 +11,7 @@ router.post(
         try {
             const {token} = req.body;
             const decoded = jwt.decode(token, {complete: true})
-            const user = await UserInfo.findOne({id: decoded?.payload.userId});
+            const user = await UserInfo.findOne({id: decoded.payload.userId});
             if (user?.favoriteFilms !== []) {
                 res.json(user.favoriteFilms)
             } else {
