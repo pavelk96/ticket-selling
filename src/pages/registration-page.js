@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import RegistrationContainer from "../components/auth/registration-form/registration-container"
+import RegistrationContainer from "../containers/registration-container/registration-container"
 
 
 class RegistrationPage extends Component {

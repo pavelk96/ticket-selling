@@ -1,5 +1,5 @@
-import AuthServices from "../../../services/user-info";
-import {loginUser} from "../../../actions";
+import AuthServices from "../../services/user-info";
+import {loginUser} from "../../actions";
 
 import './registration-container.css';
 
@@ -26,9 +26,7 @@ class RegistrationContainer extends Component {
         try {
             const data = await authServices.request('/api/auth/register', 'POST', {...this.state.form}, {})
             message.success(data.message)
-            localStorage.setItem("token", data.token);
-            await loginUser()
-            this.props.history.push("/");
+            await this.loginHandler();
         } catch (e) {
             message.error(e.message)
         }
@@ -56,8 +54,6 @@ class RegistrationContainer extends Component {
     };
 
     render () {
-
-        console.log(this.props)
 
         return (
             <div className="profile-menu">

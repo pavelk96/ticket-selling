@@ -10,18 +10,22 @@ const initialState = {
     favoriteFilmsId: [], //ид фильмов
     favoriteFilmsData: [], //информация об избранных фильмах
     buyTicketData: [], // Массив всех купленных билетов на фильм
-    buyTicketIsLoading: false
+    buyTicketIsLoading: false,
+    user: {
+        email: ""
+    }
 };
 
 
 
-const logOutUserThunk = () => {
+const logOutUserThunk = (state) => {
     localStorage.removeItem("token");
+    return {...state, user:{email: ""}, isAuthorized:false}
 };
 
 const loginUserThunk = (state) => {
     if (localStorage.getItem("token")){
-        return {...state, isAuthorized:true }
+        return {...state, isAuthorized:true, user: {email: localStorage.getItem("email")} }
     }
 };
 
@@ -33,18 +37,11 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
 
         case `CHECK_LOGIN_USER`:
+        case `LOGIN_USER`:
             return loginUserThunk(state);
 
-        case `LOGIN_USER`:
-            return {...state,
-                isAuthorized:true
-            }
-
         case `LOGOUT_USER`:
-            logOutUserThunk()
-            return {...state,
-                isAuthorized:false
-            }
+            return logOutUserThunk(state);
 
         case `GET_FILM_REQUEST`:
             return {...state,
