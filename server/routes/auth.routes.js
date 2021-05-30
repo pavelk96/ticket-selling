@@ -11,7 +11,7 @@ const router = Router()
 router.post(
     '/register',
     [
-        check('email', 'Некорректный email').isEmail(),
+        check('email', 'Некорректный email').isEmail().toLowerCase(),
         check('password', 'Минимальная длина пароля 6 символов').isLength({min: 6})
     ],
     async (req, res) => {
@@ -50,7 +50,7 @@ router.post(
 router.post(
     '/login',
     [
-        check('email', 'Введите корректный email').normalizeEmail().isEmail(),
+        check('email', 'Введите корректный email').normalizeEmail().isEmail().toLowerCase(),
         check('password', 'Введите пароль').exists()
     ],
     async (req, res) => {

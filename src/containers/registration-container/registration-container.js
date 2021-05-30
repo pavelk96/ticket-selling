@@ -18,7 +18,7 @@ const authServices = new AuthServices();
 class RegistrationContainer extends Component {
 
     form = {
-        email: "",
+        email: "".toLowerCase(),
         password: ""
     }
 

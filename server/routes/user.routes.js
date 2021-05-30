@@ -17,7 +17,6 @@ router.post(
             } else {
                 res.status(404).json({message: "Нет избранных фильмов"})
             }
-
         } catch (e) {
             console.log("ошибка",e)
         }
@@ -35,7 +34,6 @@ router.post(
             if (userInfo.favoriteFilms != null)
             userInfo.favoriteFilms = [...userInfo.favoriteFilms, filmId]
             userInfo.save();
-            res.json(filmId)
             res.status(201).json({message:"Фильм добавлен в избранное"})
         } catch (e) {
             console.log(e)
