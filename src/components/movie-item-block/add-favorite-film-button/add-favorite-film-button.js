@@ -11,7 +11,6 @@ class AddFavoriteFilmButton extends Component{
             const token = localStorage.getItem("token")
             const data = await userInfo.request('/api/user-info/add-favorite-film', 'POST', {filmId, token}, {})
             message.success(data.message)
-            console.log(data)
         } catch (e) {
 
         }

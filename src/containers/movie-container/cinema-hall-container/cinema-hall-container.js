@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import UserInfo from "../../../services/user-info";
 import {fetchByuTicket, fetchFilmData} from "../../../actions"
 import Spinner from "../../../services/spinner";
+import {Button, message} from "antd";
 
 const userInfo = new UserInfo();
 
@@ -14,7 +15,8 @@ class CinemaHallContainer extends Component {
 
         const token = localStorage.getItem("token");
             try {
-                await userInfo.request('/api/byu-ticket/byu-ticket', 'POST', {filmId, selectedPlaceNumber, token}, {})
+                const data = await userInfo.request('/api/byu-ticket/byu-ticket', 'POST', {filmId, selectedPlaceNumber, token}, {})
+                message.success(data.message)
             } catch (e) {
 
             }
@@ -78,7 +80,7 @@ class CinemaHallContainer extends Component {
                         <img src="http://www.atrium-omsk.ru/images/tpl/screen.png" alt= "img"/>
                         <div className="centered">
                             {this.renderHallGrid()}
-                            <button className="btn btn-success" onClick={() => {this.handleByuTicket(id, this.state.selectedPlaceNumber)}} >Купить</button>
+                            <Button type="primary" onClick={() => {this.handleByuTicket(id, this.state.selectedPlaceNumber)}} >Купить</Button>
                         </div>
                     </div></>}
             </>
