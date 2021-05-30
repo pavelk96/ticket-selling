@@ -44,7 +44,7 @@ class App extends Component {
                                }}/>
 
 
-
+                        <Route path="/" component={HomePage} exact />
                         <Route path="/search" component={SearchFilmPage} exact />
                         {
                             isAuthorized ? <>
