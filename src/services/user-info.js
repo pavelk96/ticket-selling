@@ -9,7 +9,7 @@ export default class UserInfo {
                 }
             }
 
-            const response = await fetch(`http://31.184.254.106/${url}`,{method, body, headers})
+            const response = await fetch(`http://31.184.254.106:5000/${url}`,{method, body, headers})
             const data = await response.json();
 
             if (!response.ok) {
