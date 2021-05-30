@@ -147,7 +147,7 @@ const getFavoriteFilmError = () => {
     };
 };
 // Получаем ид любимых фильмов пользователя и запрашиваем данные о них
-const fetchFavoriteFilm = (dispatch) => async () => {
+const fetchFavoriteFilm = async (dispatch)  => {
     dispatch(getFavoriteFilmRequest());
     const token =  localStorage.getItem("token");
     const favoriteFilmsId = await userInfo.request('/api/user-info/favorite-films', 'POST', {token})
