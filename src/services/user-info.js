@@ -5,11 +5,11 @@ export default class UserInfo {
                 body = JSON.stringify(body)
                 headers = {
                     'Content-Type': 'application/json',
-                    'Access-Control' : 'https://ticket-selli.uc.r.appspot.com'
+                    'access-control-allow-origin' : 'https://ticket-selli.uc.r.appspot.com'
                 }
             }
 
-            const response = await fetch(url,{method, body, headers})
+            const response = await fetch(`http://31.184.254.106/${url}`,{method, body, headers})
             const data = await response.json();
 
             if (!response.ok) {
