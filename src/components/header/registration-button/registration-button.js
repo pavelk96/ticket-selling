@@ -12,8 +12,8 @@ const RegistrationButton = () => {
     const {push} = useHistory();
     const dispatch = useDispatch();
 
-    const isAuthorized = useSelector(state => state.isAuthorized);
-    const userEmail = useSelector(state => state.user.email);
+    const isAuthorized = useSelector(state => state?.isAuthorized);
+    const userEmail = useSelector(state => state?.user.email);
 
     const getFavoriteFilms  = () => {
         push("/favorite-films");
