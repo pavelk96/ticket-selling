@@ -42,19 +42,22 @@ class App extends Component {
                                    const {id} = match.params
                                    return <MovieDetailsByIdContainer id={id}/>;
                                }}/>
-                        <Route
-                            path="/buy-ticket/:id"
-                            render={({match: {params}}) => <CinemaHallContainer id={params?.id}/>}/>
 
-                        <Route path="/" component={HomePage} exact/>
+
+
                         <Route path="/search" component={SearchFilmPage} exact />
                         {
                             isAuthorized ? <>
                                 <Route exact path="/registration" render={() => isAuthorized && (<Redirect to="/" />)} />
                                 <Route path="/favorite-films" component={FavoriteFilms} exact />
+                                <Route
+                                    path="/buy-ticket/:id"
+                                    render={({match: {params}}) => <CinemaHallContainer id={params?.id}/>}/>
                             </> : <>
                                 <Route path="/registration" component={RegistrationPage} exact/>
+                                <Route path="/" exact render={() => (<Redirect to="/registration" />)}/>
                                 <Route exact path="/favorite-films" render={() => (<Redirect to="/registration" />)} />
+                                <Route path="/buy-ticket/" render={() => (<Redirect to="/registration" />)} />
                             </>
                         }
                     </Content>
