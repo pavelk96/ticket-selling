@@ -4,6 +4,7 @@ import { connect} from "react-redux";
 import {fetchFilmsDigitalReleasesData} from "../../actions";
 import "./slider-home-page-container.css"
 import Spinner from "../../services/spinner";
+import SpinnerSlider from "../../services/spinner-slider";
 
 
 const contentStyle = {
@@ -52,7 +53,7 @@ class SliderHomePageContainer extends Component{
 
         return(
                     <Carousel autoplay autoplaySpeed={2000} adaptiveHeight={true} >
-                        {filmsDigitalReleasesIsLoading ? <Spinner/> : renderFilmData()}
+                        {filmsDigitalReleasesIsLoading ? <SpinnerSlider/> : renderFilmData()}
                     </Carousel>
         )
     }
