@@ -12,7 +12,12 @@ class AddFavoriteFilmButton extends Component{
 
     handleAddFavoriteFilm =  (filmId, method) => {
             this.props.fetchAddFavoriteFilm(filmId, method)
-            message.success("Фильм добавлен в избранное")
+            if (method === "add") {
+                message.success("Фильм добавлен в избранное")
+            } else if (method === "delete") {
+                message.info("Фильм удален из избранного")
+            }
+
     };
 
     renderButtuon = () => {

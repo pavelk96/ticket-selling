@@ -194,13 +194,14 @@ const addFavoriteFilmRequest = () => {
 const addFavoriteFilmSuccess =  (filmId, method) => {
     return {
         type: 'ADD_FAVORITE_FILM_SUCCESS',
-        payload: filmId, method
+        payload: {filmId, method}
     };
 }
 
-const AddFavoriteFilmsError = () => {
+const AddFavoriteFilmsError = (err) => {
     return {
-        type: 'ADD_FAVORITE_FILM_ERROR'
+        type: 'ADD_FAVORITE_FILM_ERROR',
+        payload: err
     };
 }
 

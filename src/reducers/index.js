@@ -144,38 +144,36 @@ const reducer = (state = initialState, action) => {
                 buyTicketIsLoading: false}
 
         case `ADD_FAVORITE_FILM_REQUEST` :
-            console.log(`ADD_FAVORITE_FILM_REQUEST`,action.payload)
             return {
                     ...state,
                     addFavoriteFilmIsLoading: true
             }
 
         case `ADD_FAVORITE_FILM_SUCCESS`:
-            console.log(`ADD_FAVORITE_FILM_SUCCESS`,action.payload)
             if (action.payload.method === "add") {
                 return {
                     ...state,
-                    favoriteFilmsId: [...state.favoriteFilmsId, action.payload],
+                    favoriteFilmsId: [...state.favoriteFilmsId, action.payload.filmId],
                     addFavoriteFilmIsLoading: false
                 }
             } else if (action.payload.method === "delete") {
-                console.log("Удаление")
+
                 const findIndex = state.favoriteFilmsId.indexOf(action.payload.filmId);
                 console.log("action.payload.filmId",action.payload.filmId)
                 const newFavoriteFilmsId = [
-                        ...state.favoriteFilmsId.slice(0, findIndex),
+                    ...state.favoriteFilmsId.slice(0, findIndex),
                     ...state.favoriteFilmsId.slice(findIndex + 1)
-                ]
+                ];
                 return {
                     ...state,
                     favoriteFilmsId: newFavoriteFilmsId,
                     addFavoriteFilmIsLoading: false
                 }
             }
+            return
 
 
         case `ADD_FAVORITE_FILM_ERROR`:
-            console.log(`ADD_FAVORITE_FILM_ERROR`,action.payload)
             return {
                 ...state,
                 error: action.payload,
