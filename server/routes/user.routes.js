@@ -28,13 +28,25 @@ router.post(
     '/add-favorite-film',
     async (req, res) => {
         try {
-            const {token, filmId} = req.body;
+            const {token, filmId, method} = req.body;
             const decoded = jwt.decode(token, {complete: true})
             const userInfo = await UserInfo.findOne({id: decoded.payload.userId});
-            if (userInfo.favoriteFilms != null)
-            userInfo.favoriteFilms = [...userInfo.favoriteFilms, filmId]
-            userInfo.save();
-            res.status(201).json({message:"Фильм добавлен в избранное"})
+            if (method === "add") {
+                //Добавляем фильм в избранное
+                if (userInfo.favoriteFilms != null)
+                    userInfo.favoriteFilms = [...userInfo.favoriteFilms, filmId]
+                userInfo.save();
+                res.status(201).json({message:"Фильм добавлен в избранное"})
+            } else if (method === "delete") {
+                //удаляем фильм из избранного
+                const finIndex = userInfo.favoriteFilms.indexOf(filmId);
+                userInfo.favoriteFilms = [
+                    ...userInfo.favoriteFilms.slice(0, finIndex),
+                    ...userInfo.favoriteFilms.slice(finIndex + 1)
+                ]
+                userInfo.save();
+                res.status(201).json({message:"Фильм удален из избранного"})
+            }
         } catch (e) {
             console.log(e)
         }

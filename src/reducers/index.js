@@ -5,18 +5,17 @@ const initialState = {
     filmsDigitalReleases: [],
     filmsDigitalReleasesIsLoading: [],
     isLoading: false,
+    addFavoriteFilmIsLoading: false,
+    buyTicketIsLoading: false,
     isAuthorized: false,
     error: null,
-    favoriteFilmsId: [], //ид фильмов
     favoriteFilmsData: [], //информация об избранных фильмах
     buyTicketData: [], // Массив всех купленных билетов на фильм
-    buyTicketIsLoading: false,
+    favoriteFilmsId: [],
     user: {
         email: ""
     }
 };
-
-
 
 const logOutUserThunk = (state) => {
     localStorage.removeItem("token");
@@ -28,9 +27,6 @@ const loginUserThunk = (state) => {
         return {...state, isAuthorized:true, user: {email: localStorage.getItem("email")} }
     }
 };
-
-
-
 
 const reducer = (state = initialState, action) => {
 
@@ -104,8 +100,8 @@ const reducer = (state = initialState, action) => {
                 isLoading: true}
 
         case `GET_FAVORITE_FILMS_ID_SUCCESS`:
-            console.log(action.payload)
-            return {...state,
+            console.log("favorite films id",action.payload)
+            return {...state,                                                       //
                 favoriteFilmsId: action.payload,
                 isLoading: false}
 
@@ -146,6 +142,45 @@ const reducer = (state = initialState, action) => {
             return {...state,
                 error: action.payload,
                 buyTicketIsLoading: false}
+
+        case `ADD_FAVORITE_FILM_REQUEST` :
+            console.log(`ADD_FAVORITE_FILM_REQUEST`,action.payload)
+            return {
+                    ...state,
+                    addFavoriteFilmIsLoading: true
+            }
+
+        case `ADD_FAVORITE_FILM_SUCCESS`:
+            console.log(`ADD_FAVORITE_FILM_SUCCESS`,action.payload)
+            if (action.payload.method === "add") {
+                return {
+                    ...state,
+                    favoriteFilmsId: [...state.favoriteFilmsId, action.payload],
+                    addFavoriteFilmIsLoading: false
+                }
+            } else if (action.payload.method === "delete") {
+                console.log("Удаление")
+                const findIndex = state.favoriteFilmsId.indexOf(action.payload.filmId);
+                console.log("action.payload.filmId",action.payload.filmId)
+                const newFavoriteFilmsId = [
+                        ...state.favoriteFilmsId.slice(0, findIndex),
+                    ...state.favoriteFilmsId.slice(findIndex + 1)
+                ]
+                return {
+                    ...state,
+                    favoriteFilmsId: newFavoriteFilmsId,
+                    addFavoriteFilmIsLoading: false
+                }
+            }
+
+
+        case `ADD_FAVORITE_FILM_ERROR`:
+            console.log(`ADD_FAVORITE_FILM_ERROR`,action.payload)
+            return {
+                ...state,
+                error: action.payload,
+                addFavoriteFilmIsLoading: false
+            }
 
         default:
             return state;

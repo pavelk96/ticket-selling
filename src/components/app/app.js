@@ -10,19 +10,20 @@ import FavoriteFilms from "../../pages/favorite-films";
 import SearchFilmPage from "../../pages/search-film-page";
 import TopHeader from "../header/top-header";
 import HomePage from "../../pages/home-page";
-import {checkLoginUser} from "../../actions";
+import {checkLoginUser, fetchFavoriteFilm} from "../../actions";
 
 import './app.css';
 import 'antd/dist/antd.css';
 import RegistrationPage from "../../pages/registration-page"; // or 'antd/dist/antd.less'
 
 
-const { Header, Footer, Content } = Layout;
+const { Header, Content } = Layout;
 
 class App extends Component {
 
     componentDidMount() {
         this.props.checkLoginUser()
+        this.props.fetchFavoriteFilm()
     }
 
     render() {
@@ -76,7 +77,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        checkLoginUser: () => dispatch(checkLoginUser())
+        checkLoginUser: () => dispatch(checkLoginUser()),
+        fetchFavoriteFilm: () => fetchFavoriteFilm(dispatch)
     }
 };
 
