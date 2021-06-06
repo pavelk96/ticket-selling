@@ -17,7 +17,12 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.0.5",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "express-validator": "^6.10.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.3"
   },
   "scripts": {
     "build": "react-scripts build",
