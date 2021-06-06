@@ -213,7 +213,7 @@ const fetchAddFavoriteFilm =  (dispatch) => (filmId, method) => {
             dispatch(addFavoriteFilmSuccess(filmId, method))
         })
         .catch((err) => {
-            console.log(err)
+
             dispatch(AddFavoriteFilmsError(err))
         });
 };

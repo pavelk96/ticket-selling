@@ -26,6 +26,16 @@
 }
 
 .occupied-place {
-    background-color: #000c17;
+    background-image: url(/src/images/place3.png);
     pointer-events: none;
+    margin-left: 9px;
+    margin-top: 9px;
+    margin-right: 9px;
+    display: inline-block;
+    justify-content: flex-start;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    color: #7db6fa;
 }

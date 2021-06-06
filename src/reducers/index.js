@@ -1,6 +1,6 @@
 
 const initialState = {
-    filmData:[],
+    filmData:{},
     filmsSearch: [],
     filmsDigitalReleases: [],
     filmsDigitalReleasesIsLoading: [],
@@ -17,9 +17,9 @@ const initialState = {
     }
 };
 
-const logOutUserThunk = (state) => {
+const logOutUserThunk = () => {
     localStorage.removeItem("token");
-    return {...state, user:{email: ""}, isAuthorized:false}
+    return initialState
 };
 
 const loginUserThunk = (state) => {
@@ -46,7 +46,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case `GET_FILM_SUCCESS`:
-            console.log("из reducers",action)
+
             return {...state,
                 filmData: action.payload,
                 isLoading: false}
@@ -62,7 +62,6 @@ const reducer = (state = initialState, action) => {
                 isLoading: true}
 
         case `GET_FILMS_SEARCH_SUCCESS`:
-            console.log(action)
             return {...state,
                 filmsSearch: action.payload?.films,
                 isLoading: false}
@@ -78,7 +77,6 @@ const reducer = (state = initialState, action) => {
                 filmsDigitalReleasesIsLoading: true}
 
         case `GET_FILMS_DIGITAL_RELEASES_SUCCESS`:
-            console.log(action)
             return {...state,
                 filmsDigitalReleases: action.payload?.films,
                 filmsDigitalReleasesIsLoading: false}
@@ -89,7 +87,6 @@ const reducer = (state = initialState, action) => {
                 filmsDigitalReleasesIsLoading: false}
 
         case 'PUSH_SELECTED_FILM_ID':
-            console.log(action.payload)
             return {...state,
                 filmIdSelectedMovie: action.payload}
 
@@ -100,7 +97,6 @@ const reducer = (state = initialState, action) => {
                 isLoading: true}
 
         case `GET_FAVORITE_FILMS_ID_SUCCESS`:
-            console.log("favorite films id",action.payload)
             return {...state,                                                       //
                 favoriteFilmsId: action.payload,
                 isLoading: false}
@@ -116,7 +112,6 @@ const reducer = (state = initialState, action) => {
                 isLoading: true}
 
         case `GET_FAVORITE_FILM_SUCCESS`:
-            console.log(action.payload)
             return {...state,
                 favoriteFilmsData: action.payload,
                 isLoading: false}
@@ -133,7 +128,6 @@ const reducer = (state = initialState, action) => {
                 buyTicketIsLoading: true}
 
         case `GET_BUY_TICKET_SUCCESS`:
-            console.log(action.payload)
             return {...state,
                 buyTicketData: action.payload?.candidateFilm?.placesTaken,
                 buyTicketIsLoading: false}
@@ -159,7 +153,6 @@ const reducer = (state = initialState, action) => {
             } else if (action.payload.method === "delete") {
 
                 const findIndex = state.favoriteFilmsId.indexOf(action.payload.filmId);
-                console.log("action.payload.filmId",action.payload.filmId)
                 const newFavoriteFilmsId = [
                     ...state.favoriteFilmsId.slice(0, findIndex),
                     ...state.favoriteFilmsId.slice(findIndex + 1)

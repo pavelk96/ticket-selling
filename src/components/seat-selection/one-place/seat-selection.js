@@ -32,15 +32,15 @@ class OnePlace extends Component {
 
         const statePlace = (this.props.buyTicketData || []).includes(occupiedPlace);
         if (statePlace) {
-            className = ' place occupied-place'
+            className = ' occupied-place'
         }
 
 
 
         const onePlace = (
-                <div disabled='true' title="Описание" className={className}>
-                    <span  onClick={handlePlaceSelected}>{place}</span>
-                </div>
+            <div title="Описание" className={className}>
+                <span  onClick={handlePlaceSelected}>{place}</span>
+            </div>
         )
 
         return (

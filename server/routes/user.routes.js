@@ -18,7 +18,7 @@ router.post(
                 res.status(404).json({message: "Нет избранных фильмов"})
             }
         } catch (e) {
-            console.log("ошибка",e)
+
         }
     }
 )
@@ -48,7 +48,7 @@ router.post(
                 res.status(201).json({message:"Фильм удален из избранного"})
             }
         } catch (e) {
-            console.log(e)
+
         }
     }
 )
