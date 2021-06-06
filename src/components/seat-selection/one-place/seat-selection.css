@@ -24,3 +24,8 @@
     width: 24px;
     height: 24px;
 }
+
+.occupied-place {
+    background-color: #000c17;
+    pointer-events: none;
+}

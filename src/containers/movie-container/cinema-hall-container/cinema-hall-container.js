@@ -15,8 +15,12 @@ class CinemaHallContainer extends Component {
 
         const token = localStorage.getItem("token");
             try {
-                const data = await userInfo.request('/api/byu-ticket/byu-ticket', 'POST', {filmId, selectedPlaceNumber, token}, {})
-                message.success(data.message)
+                if (selectedPlaceNumber.length == 0) {
+                    message.error("Не выбраны места для покупки!")
+                } else {
+                    const data = await userInfo.request('/api/byu-ticket/byu-ticket', 'POST', {filmId, selectedPlaceNumber, token}, {})
+                    message.success(data.message)
+                }
             } catch (e) {
 
             }
@@ -30,10 +34,11 @@ class CinemaHallContainer extends Component {
     }
 
     state = {
-        selectedPlaceNumber: []
+        selectedPlaceNumber: [],
+        occupiedPlace : false
     };
 
-    handleSelectedPlace = (place) => {
+    handleSelectedPlace =  (place) => {
 
         const {selectedPlaceNumber} = this.state;
 
@@ -59,7 +64,12 @@ class CinemaHallContainer extends Component {
             let placeArr = [];
             for (let n =1; n<=10; n++) {
                 const place = `${i.toString()}.${n.toString()}`;
-                placeArr = [...placeArr, <OnePlace  key={place} place={n.toString()} handleSelectedPlace={() => this.handleSelectedPlace(place)} />];
+
+                placeArr = [...placeArr, <OnePlace key={place}
+                                                   occupiedPlace={place}
+                                                   place={n.toString()}
+                                                   buyTicketData={this.props.buyTicketData}
+                                                   handleSelectedPlace={() => this.handleSelectedPlace(place)}/>];
             }
             gridArr = [...gridArr,<div key={i} >Ряд: {i}{placeArr}</div> ]
         }
@@ -67,10 +77,7 @@ class CinemaHallContainer extends Component {
     };
 
     render() {
-
-
         const {id, buyTicketIsLoading, isLoading, filmData} = this.props;
-
         return (
             <>
                 {(buyTicketIsLoading && isLoading) ? <Spinner/> : <>
@@ -90,7 +97,7 @@ class CinemaHallContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        buyTicket: state.buyTicket,
+        buyTicketData: state.buyTicketData,
         buyTicketIsLoading: state.buyTicketIsLoading,
         isLoading: state.isLoading,
         filmData: state.filmData

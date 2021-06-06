@@ -24,7 +24,7 @@ class BuyTicketButton extends Component {
         oldDate.setDate(oldDate.getDate()-28);
         const oldYear = oldDate.getFullYear();
         if (this.props?.year >= oldYear) {
-            return <Link to={`/buy-ticket/${filmId}`} className="btn btn-success button-buy-ticket">Купить билет</Link>;
+            return <Link to={`/buy-ticket/${filmId}`} className="button-buy-ticket">Купить</Link>;
         }
             return null
     }
