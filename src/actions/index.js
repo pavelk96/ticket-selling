@@ -101,38 +101,26 @@ const checkLoginUser = () => {
 };
 
 // Получаем id избранных фильмов
-const getFavoriteFilmsRequest = () => {
+const getFavoriteFilmsIdRequest = () => {
     return {
         type: 'GET_FAVORITE_FILMS_ID_REQUEST'
     };
 };
 
-const getFavoriteFilmsSuccess = (favoriteFilms) => {
+const getFavoriteFilmsIdSuccess = (favoriteFilmsId) => {
     return {
         type: 'GET_FAVORITE_FILMS_ID_SUCCESS',
-        payload: favoriteFilms
+        payload: favoriteFilmsId
     };
 };
 
-const getFavoriteFilmsError = () => {
+const getFavoriteFilmsIdError = () => {
     return {
         type: 'GET_FAVORITE_FILMS_ID_ERROR'
     };
 };
 
-const fetchFavoriteFilmsId = (dispatch) => () => {
-    dispatch(getFavoriteFilmsRequest());
-        const token =  localStorage.getItem("token");
-        userInfo.request('/api/user-info/favorite-films', 'POST', {         token})
-        .then((favoriteFilms) => dispatch(getFavoriteFilmsSuccess(favoriteFilms)))
-        .catch((err) => dispatch(getFavoriteFilmsError(err)));
-};
 // Получаем инф-цию об избранных фильмах по id (favoriteFilmsId)
-const getFavoriteFilmRequest = () => {
-    return {
-        type: 'GET_FAVORITE_FILM_REQUEST'
-    };
-};
 
 const getFavoriteFilmSuccess = (favoriteFilmsData) => {
     return {
@@ -148,16 +136,17 @@ const getFavoriteFilmError = () => {
 };
 // Получаем ид любимых фильмов пользователя и запрашиваем данные о них
 const fetchFavoriteFilm = async (dispatch)  => {
-    dispatch(getFavoriteFilmRequest());
+    dispatch(getFavoriteFilmsIdRequest());
     const token =  localStorage.getItem("token");
     const favoriteFilmsId = await userInfo.request('/api/user-info/favorite-films', 'POST', {token})
-        .then(favoriteFilms => favoriteFilms)
-        .catch(err => dispatch(getFavoriteFilmsError(err)))
+        .then(favoriteFilmsId => favoriteFilmsId)
+        .catch(err => dispatch(getFavoriteFilmsIdError(err)))
 
     if (favoriteFilmsId && favoriteFilmsId.length === 0) {
         dispatch(getFavoriteFilmSuccess([]));
+    } else {
+        dispatch(getFavoriteFilmsIdSuccess(favoriteFilmsId))
     }
-
     let filmDataArr = [];
     for (let i = 0; i < favoriteFilmsId.length; i++) {
         const filmData = await kinopoiskService.getFilmById(favoriteFilmsId[i])
@@ -188,13 +177,46 @@ const getByuTicketError = () => {
     };
 };
 
-const fetchByuTicket = (dispatch) => (filmId) => {
+const fetchByuTicket = (dispatch) => async (filmId) => {
     dispatch(getByuTicketRequest(filmId));
-    userInfo.request('/api/byu-ticket/request-tickets', 'POST', {filmId}, {})
+    await userInfo.request('/api/byu-ticket/request-tickets', 'POST', {filmId}, {})
         .then((favoriteFilms) => dispatch(getByuTicketSuccess(favoriteFilms)))
         .catch((err) => dispatch(getByuTicketError(err)));
 };
 
+const addFavoriteFilmRequest = () => {
+
+    return {
+        type: `ADD_FAVORITE_FILM_REQUEST`
+    }
+};
+
+const addFavoriteFilmSuccess =  (filmId, method) => {
+    return {
+        type: 'ADD_FAVORITE_FILM_SUCCESS',
+        payload: {filmId, method}
+    };
+}
+
+const AddFavoriteFilmsError = (err) => {
+    return {
+        type: 'ADD_FAVORITE_FILM_ERROR',
+        payload: err
+    };
+}
+
+const fetchAddFavoriteFilm =  (dispatch) => (filmId, method) => {
+    dispatch(addFavoriteFilmRequest())
+    const token = localStorage.getItem("token")
+    userInfo.request('/api/user-info/add-favorite-film', 'POST', {filmId, token, method}, {})
+        .then((d)=>{
+            dispatch(addFavoriteFilmSuccess(filmId, method))
+        })
+        .catch((err) => {
+
+            dispatch(AddFavoriteFilmsError(err))
+        });
+};
 
 export {
     fetchFilmData,
@@ -203,7 +225,7 @@ export {
     loginUser,
     logoutUser,
     checkLoginUser,
-    fetchFavoriteFilmsId,
     fetchFavoriteFilm,
-    fetchByuTicket
+    fetchByuTicket,
+    fetchAddFavoriteFilm
 };

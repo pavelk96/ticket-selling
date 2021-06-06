@@ -15,7 +15,7 @@ class OnePlace extends Component {
 
     render() {
 
-        const {place} = this.props;
+        const {place, occupiedPlace} = this.props;
 
         let className = 'place';
 
@@ -30,12 +30,17 @@ class OnePlace extends Component {
             className = ' place place-selected';
         }
 
+        const statePlace = (this.props.buyTicketData || []).includes(occupiedPlace);
+        if (statePlace) {
+            className = ' occupied-place'
+        }
+
 
 
         const onePlace = (
-                <div title="Описание" className={className}>
-                    <span onClick={handlePlaceSelected}>{place}</span>
-                </div>
+            <div title="Описание" className={className}>
+                <span  onClick={handlePlaceSelected}>{place}</span>
+            </div>
         )
 
         return (

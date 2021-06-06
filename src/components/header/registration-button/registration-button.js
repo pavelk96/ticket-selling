@@ -24,7 +24,7 @@ const RegistrationButton = () => {
             return
         }
         push("/registration");
-    },[isAuthorized]);
+    },[isAuthorized, push]);
 
 
     const handleLogoutButton = () => {
