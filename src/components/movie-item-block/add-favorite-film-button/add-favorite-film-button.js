@@ -1,30 +1,59 @@
-import UserInfo from "../../../services/user-info";
 import React,{Component} from 'react';
 import { message } from 'antd';
+import {connect} from "react-redux";
+import {fetchAddFavoriteFilm} from "../../../actions";
+import SpinnerAddFavoriteFilm from "../../../services/spinner-add-favorite-film";
+import notLike from "./notLike.png";
+import Like from "./Like.png"
 
-const userInfo = new UserInfo();
+
 
 class AddFavoriteFilmButton extends Component{
 
-    handleAddFavoriteFilm = async (filmId) => {
-        try {
-            const token = localStorage.getItem("token")
-            const data = await userInfo.request('/api/user-info/add-favorite-film', 'POST', {filmId, token}, {})
-            message.success(data.message)
-        } catch (e) {
+    handleAddFavoriteFilm =  (filmId, method) => {
+            this.props.fetchAddFavoriteFilm(filmId, method)
+            if (method === "add") {
+                message.success("Фильм добавлен в избранное")
+            } else if (method === "delete") {
+                message.info("Фильм удален из избранного")
+            }
 
-        }
     };
 
+    renderButtuon = () => {
+        const findArr = this.props.favoriteFilmsId.includes(this.props.filmId)
+        if (findArr) {
+            return (
+                <img src={Like} onClick={() => this.handleAddFavoriteFilm(this.props.filmId, "delete")} />
+            )
+        } else {
+            return (
+                <img src={notLike} onClick={() => this.handleAddFavoriteFilm(this.props.filmId, "add")} />
+            )
+        }
+    }
 
     render(){
-        const {filmId} = this.props;
+        const {addFavoriteFilmIsLoading} = this.props;
         return(
             <>
-                <button className="btn btn-info" onClick={() => this.handleAddFavoriteFilm(filmId)}>Add this film</button>
+                {addFavoriteFilmIsLoading ? <SpinnerAddFavoriteFilm/> : this.renderButtuon()}
             </>
         )
     }
 }
 
-export default AddFavoriteFilmButton;
+const mapStateToProps = (state) => {
+    return {
+        addFavoriteFilmIsLoading: state.addFavoriteFilmIsLoading,
+        favoriteFilmsId: state.favoriteFilmsId
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchAddFavoriteFilm: fetchAddFavoriteFilm(dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddFavoriteFilmButton);

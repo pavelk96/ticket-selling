@@ -3,7 +3,6 @@ import { Carousel } from 'antd';
 import { connect} from "react-redux";
 import {fetchFilmsDigitalReleasesData} from "../../actions";
 import "./slider-home-page-container.css"
-import Spinner from "../../services/spinner";
 import SpinnerSlider from "../../services/spinner-slider";
 
 
@@ -19,7 +18,6 @@ const contentStyle = {
 const imgStyle = {
     display: "flex",
 }
-
 
 class SliderHomePageContainer extends Component{
 
